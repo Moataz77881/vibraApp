@@ -15,20 +15,27 @@ class loginScreen extends StatelessWidget {
           children: [
             Spacer(),
             Container(
-              child: Image.asset("assets/images/vibra.png",
+              child: Image.asset(
+                "assets/images/vibra.png",
                 width: 200,
                 height: 200,
               ),
             ),
-            Spacer(flex: 1,),
+            Spacer(
+              flex: 1,
+            ),
 
-            textFieldBorder('Name'),
+            textFieldBorder('Email'),
 
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
 
             textFieldBorder('Phone'),
 
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
 
             Container(
               margin: EdgeInsets.all(11),
