@@ -12,7 +12,7 @@ class myApp extends StatelessWidget {
       routes: {
         loginScreen.routeName: (BuildContext) => loginScreen(),
         optionScreen.routeName: (BuildContext) => optionScreen(),
-        splashScreen.routname: (BuildContext) => splashScreen()
+        splashScreen.routname: (BuildContext) => splashScreen(),
       },
       initialRoute: splashScreen.routname,
       // initialRoute: loginScreen.routeName,
