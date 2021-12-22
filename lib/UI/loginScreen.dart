@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/optionScreen.dart';
-import 'package:graduation_project/textFieldBorderPhone.dart';
-import 'package:graduation_project/textFieldBorderUsername.dart';
+import 'package:graduation_project/UI/textFieldBorderPhone.dart';
+import 'package:graduation_project/UI/textFieldBorderUsername.dart';
 
 class loginScreen extends StatelessWidget {
   static const String routeName = 'Login Screen';
+  static String userPhoneNumber = '';
+  static String userName = '';
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -48,8 +49,9 @@ class loginScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (formKey.currentState?.validate() == true) {
-                            Navigator.pushNamed(
-                                context, optionScreen.routeName);
+                            formValidation(userPhoneNumber, userName);
+                            // Navigator.pushNamed(
+                            //     context, optionScreen.routeName);
                           }
                         },
                         child: Text('Continue'),
@@ -68,5 +70,5 @@ class loginScreen extends StatelessWidget {
     );
   }
 
-  void formValidation() {}
+  void formValidation(String number, String UserName) {}
 }

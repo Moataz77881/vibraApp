@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/splashScreen.dart';
+import 'package:graduation_project/UI/splashScreen.dart';
 
-import 'loginScreen.dart';
-import 'optionScreen.dart';
+import 'UI/loginScreen.dart';
+import 'UI/optionScreen.dart';
 
 class myApp extends StatelessWidget {
   @override

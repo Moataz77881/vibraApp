@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/UI/loginScreen.dart';
 
 class textFieldBorderUsername extends StatefulWidget {
   static const String hintText = 'User name';
@@ -9,7 +10,6 @@ class textFieldBorderUsername extends StatefulWidget {
 }
 
 class _textFieldBorderUsernameState extends State<textFieldBorderUsername> {
-  String userName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,8 @@ class _textFieldBorderUsernameState extends State<textFieldBorderUsername> {
                 borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
-        onChanged: (value) {
-          userName = value;
-          // setState(() {});
+        onChanged: (inputName) {
+          loginScreen.userName = inputName;
         },
         validator: (value) {
           if (value == null || value.trim().isEmpty) {
