@@ -16,6 +16,11 @@ class textFieldBorderPhoneNumber extends StatelessWidget {
         onInputChanged: (PhoneNumber number) {
           loginScreen.userPhoneNumber = number.toString();
         },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Invalid phone number';
+          }
+        },
         cursorColor: Colors.white,
         keyboardType: TextInputType.phone,
         textStyle: TextStyle(color: Colors.white),

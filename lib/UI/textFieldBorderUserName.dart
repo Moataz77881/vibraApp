@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/UI/loginScreen.dart';
 
-class textFieldBorderUsername extends StatefulWidget {
-  static const String hintText = 'User name';
-
-  @override
-  State<textFieldBorderUsername> createState() =>
-      _textFieldBorderUsernameState();
-}
-
-class _textFieldBorderUsernameState extends State<textFieldBorderUsername> {
+class textFieldBorderUsername extends StatelessWidget {
+  static const String hintText = 'user name';
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,7 @@ class _textFieldBorderUsernameState extends State<textFieldBorderUsername> {
         decoration: InputDecoration(
             filled: true,
             fillColor: Color.fromARGB(255, 0, 70, 168),
-            hintText: textFieldBorderUsername.hintText,
+            hintText: hintText,
             hintStyle: TextStyle(color: Colors.white),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
