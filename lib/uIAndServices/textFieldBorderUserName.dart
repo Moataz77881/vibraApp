@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/UI/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/optionScreen.dart';
 
 class textFieldBorderUsername extends StatelessWidget {
   static const String hintText = 'user name';
@@ -22,7 +22,7 @@ class textFieldBorderUsername extends StatelessWidget {
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
         onChanged: (inputName) {
-          loginScreen.userName = inputName;
+          optionScreen.userName = inputName;
         },
         validator: (value) {
           if (value == null || value.trim().isEmpty) {

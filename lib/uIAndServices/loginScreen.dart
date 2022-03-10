@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/Data/data.dart';
-import 'package:graduation_project/UI/optionScreen.dart';
-import 'package:graduation_project/UI/otpScreen.dart';
-import 'package:graduation_project/UI/textFieldBorderPhone.dart';
-import 'package:graduation_project/UI/textFieldBorderUserName.dart';
+import 'package:graduation_project/Data/argData/athDataUtils.dart';
+import 'package:graduation_project/uIAndServices/optionScreen.dart';
+import 'package:graduation_project/uIAndServices/otpScreen.dart';
+import 'package:graduation_project/uIAndServices/textFieldBorderPhone.dart';
+import 'package:graduation_project/uIAndServices/textFieldBorderUserName.dart';
+import 'package:graduation_project/utils/hideLoading.dart';
+import 'package:graduation_project/utils/showLoading.dart';
+import 'package:graduation_project/utils/showMessage.dart';
 
 class loginScreen extends StatelessWidget {
   static const String routeName = 'Login Screen';
@@ -56,6 +59,7 @@ class loginScreen extends StatelessWidget {
                         ),
                         onPressed: () async {
                           if (formKey.currentState?.validate() == true) {
+                            showLoading.show(context);
                             await _firebaseAuth.verifyPhoneNumber(
                               phoneNumber: userPhoneNumber,
                               verificationCompleted:
@@ -64,24 +68,34 @@ class loginScreen extends StatelessWidget {
                                     .signInWithCredential(phoneAuthCredential)
                                     .then((value) {
                                   Navigator.pushNamed(
-                                      context, optionScreen.routeName);
+                                      context, optionScreen.routeName); // todo
                                 }).onError((error, stackTrace) {
-                                  print('Account creation error');
+                                  showMessage.show(context,
+                                      'Account creation error'); // show dialog message
                                 }).timeout(Duration(seconds: 10),
                                         onTimeout: () {
-                                  print('cannot connect to server');
+                                  showMessage.show(context,
+                                      'cannot connect to server'); // show dialog message
                                 });
                               },
-                              verificationFailed: (verificationFailed) async {
-                                print(verificationFailed.message);
+                              verificationFailed: (verificationFailed) {
+                                if (verificationFailed.message != null) {
+                                  showMessage.show(context,
+                                      'verfication failed please try again');
+                                  hideLoading.hide(context);
+                                }
                               },
                               codeSent: (verificationId, resendingToken) async {
-                                Navigator.pushNamed(context, otpScreen.routName,
-                                    arguments:
-                                        data(verification_Id: verificationId));
+                                await Navigator.pushNamed(
+                                    context, otpScreen.routName,
+                                    arguments: athDataUtils(
+                                        verification_Id: verificationId));
                               },
                               codeAutoRetrievalTimeout: (verificationId) {},
                             );
+                            if (_firebaseAuth.currentUser != null) {
+                              optionScreen.uID = _firebaseAuth.currentUser!.uid;
+                            }
                           }
                         },
                         child: Text('Verify'),

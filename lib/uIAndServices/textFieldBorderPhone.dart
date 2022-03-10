@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/UI/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/optionScreen.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class textFieldBorderPhoneNumber extends StatelessWidget {
@@ -15,6 +16,7 @@ class textFieldBorderPhoneNumber extends StatelessWidget {
       child: InternationalPhoneNumberInput(
         onInputChanged: (PhoneNumber number) {
           loginScreen.userPhoneNumber = number.toString();
+          optionScreen.phoneNumber = number.toString();
         },
         validator: (value) {
           if (value == null || value.isEmpty) {

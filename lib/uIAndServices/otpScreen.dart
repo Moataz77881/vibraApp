@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/Data/data.dart';
-import 'package:graduation_project/UI/optionScreen.dart';
+import 'package:graduation_project/Data/argData/athDataUtils.dart';
+import 'package:graduation_project/uIAndServices/optionScreen.dart';
+import 'package:graduation_project/utils/showMessage.dart';
 
 class otpScreen extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
@@ -11,8 +12,9 @@ class otpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var arg = (ModalRoute.of(context)?.settings.arguments) as data;
+    var arg = (ModalRoute.of(context)?.settings.arguments) as athDataUtils;
     verificationId = arg.verification_Id;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 1, 87, 207),
@@ -91,8 +93,7 @@ class otpScreen extends StatelessWidget {
         Navigator.pushNamed(context, optionScreen.routeName);
       }
     } on FirebaseAuthException catch (e) {
-      // TODO
-      print(e.message);
+      showMessage.show(context, e.toString());
     }
   }
 }

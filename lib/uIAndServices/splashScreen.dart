@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/UI/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/loginScreen.dart';
 
 class splashScreen extends StatelessWidget {
   static const String routname = 'splashScreen';
@@ -20,13 +20,5 @@ class splashScreen extends StatelessWidget {
       // time
       animationDuration: Duration(milliseconds: this.time_duration),
     );
-    // child: SplashScreen(
-    //   seconds: 6,
-    //   image: Image.asset('assets/images/vibra.png'),
-    //   photoSize: 100.0,
-    //   backgroundColor: Color.fromARGB(255, 1, 87, 207),
-    //   navigateAfterSeconds: loginScreen(),
-    //   useLoader: false,
-    // onClick: ()=>print("Flutter Egypt"),
   }
 }
