@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:graduation_project/Data/fireStore/dataStoreUtils.dart';
-import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/uIAndServices/searchPackge/searchTitle.dart';
 
 class searchScreen extends StatefulWidget {
@@ -13,9 +12,7 @@ class searchScreen extends StatefulWidget {
 }
 
 class _searchScreenState extends State<searchScreen> {
-  TextEditingController userNameEditingController = new TextEditingController();
 
-  setOrRetrieveData onSearch = new setOrRetrieveData();
   late QuerySnapshot searchSnapshot;
   String name = '';
 
