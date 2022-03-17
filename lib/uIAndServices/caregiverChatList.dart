@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/uIAndServices/searchScreen.dart';
+import 'package:graduation_project/uIAndServices/searchPackge/searchScreen.dart';
 
 class caregiverForeChatList extends StatelessWidget {
   static const String routName = 'caregiverForeChatList';

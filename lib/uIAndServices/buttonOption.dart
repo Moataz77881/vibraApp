@@ -5,6 +5,7 @@ import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
 import 'package:graduation_project/uIAndServices/caregiverChatList.dart';
 import 'package:graduation_project/uIAndServices/deafblindChatList.dart';
+import 'package:graduation_project/utils/showLoading.dart';
 import 'package:graduation_project/utils/showMessage.dart';
 import 'package:provider/provider.dart';
 
@@ -52,6 +53,7 @@ class buttonOption extends StatelessWidget {
                         //todo provider
                         provider.updateUser(fireStoreUser);
                         if (option == 'I am Caregiver') {
+                          showLoading();
                           showMessage.show(
                               context, 'account created successfully');
                           Navigator.pushReplacementNamed(
