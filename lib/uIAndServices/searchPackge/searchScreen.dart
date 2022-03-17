@@ -12,7 +12,6 @@ class searchScreen extends StatefulWidget {
 }
 
 class _searchScreenState extends State<searchScreen> {
-
   late QuerySnapshot searchSnapshot;
   String name = '';
 
@@ -76,7 +75,7 @@ class _searchScreenState extends State<searchScreen> {
                 ],
               ),
             ),
-            Container(child: searchList(name))
+            Expanded(child: searchList(name))
           ],
         ),
       ),
