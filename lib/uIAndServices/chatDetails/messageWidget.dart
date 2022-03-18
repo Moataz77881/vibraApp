@@ -16,7 +16,7 @@ class messageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     provider = Provider.of<authProvider>(context);
     return Container(
-        child: messageDataObject.id == provider.user!.uID
+        child: messageDataObject.senderId == provider.user!.uID
             ? sendMessagesShow(messageDataObject.content,
                 messageDataObject.dateTime.toString())
             : recievedMessageShow(messageDataObject.content,

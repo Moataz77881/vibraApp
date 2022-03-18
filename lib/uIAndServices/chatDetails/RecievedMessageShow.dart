@@ -8,8 +8,21 @@ class recievedMessageShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(content),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 222, 222, 222),
+              borderRadius: BorderRadius.all(Radius.circular(24))),
+          child: Text(
+            content,
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Expanded(child: Container()),
+      ],
     );
   }
 }

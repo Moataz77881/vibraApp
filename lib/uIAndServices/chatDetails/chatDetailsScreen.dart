@@ -24,7 +24,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
     provider = Provider.of<authProvider>(context);
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
-      // backgroundColor: Color.fromARGB(190, 250, 250, 250),
+       backgroundColor: Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 1, 87, 207),
         title: Text(
@@ -33,7 +33,12 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         ),
       ),
       body: Container(
+        // color: Colors.white,
+        margin: EdgeInsets.all(20),
         padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
             Expanded(
@@ -42,6 +47,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                 child: StreamBuilder<QuerySnapshot<messageData>>(
                   stream: messageData
                       .withConverter(userDetails.uID, provider.user!.uID)
+                      .orderBy('dateTime', descending: false)
                       .snapshots(),
                   builder: (builder, snapshot) {
                     if (snapshot.hasError) {
@@ -53,7 +59,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                       );
                     }
                     var data =
-                        snapshot.data!.docs.map((doc) => doc.data()).toList();
+                    snapshot.data!.docs.map((doc) => doc.data()).toList();
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (BuildContext, index) {
