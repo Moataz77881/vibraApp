@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/Data/fireStore/dataStoreUtils.dart';
+import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/uIAndServices/chatDetails/chatDetailsScreen.dart';
 
 class searchTitle extends StatelessWidget {

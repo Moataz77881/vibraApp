@@ -41,4 +41,5 @@ class userData {
             toFirestore: (user, _) => user.toFireStore());
   }
 // this function connect with fire store and get or send data with userData opject
+
 }

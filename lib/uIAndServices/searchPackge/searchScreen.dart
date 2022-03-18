@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:graduation_project/Data/fireStore/dataStoreUtils.dart';
+import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/uIAndServices/searchPackge/searchTitle.dart';
 
 class searchScreen extends StatefulWidget {
@@ -47,16 +47,13 @@ class _searchScreenState extends State<searchScreen> {
                           fillColor: Colors.white,
                           filled: true,
                           hintText: 'Search',
-                          border: OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.elliptical(12, 12)),
                               borderSide: BorderSide(color: Colors.white))),
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      searchList('moataz');
-                    },
                     child: Container(
                       margin: EdgeInsets.all(11),
                       decoration: BoxDecoration(
@@ -83,11 +80,11 @@ class _searchScreenState extends State<searchScreen> {
   }
 
   Widget searchList(String _userNameEditingController) {
-    return FutureBuilder<QuerySnapshot<userData>>(
-        future: userData
+    return StreamBuilder<QuerySnapshot<userData>>(
+        stream: userData
             .withConverter()
             .where('userName', isEqualTo: _userNameEditingController)
-            .get(),
+            .snapshots(),
         builder: (builder, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
@@ -101,8 +98,6 @@ class _searchScreenState extends State<searchScreen> {
               shrinkWrap: true,
               itemCount: user?.length,
               itemBuilder: (BuildContext, index) {
-                // setState(() {
-                // });
                 return searchTitle(
                   userName: user?.elementAt(index).userName ?? 'empty',
                   user: user?.elementAt(index),

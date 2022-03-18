@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/Data/fireStore/dataStoreUtils.dart';
 import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
+import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
 import 'package:graduation_project/uIAndServices/caregiverChatList.dart';
 import 'package:graduation_project/uIAndServices/deafblindChatList.dart';
