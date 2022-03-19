@@ -15,17 +15,17 @@ class searchTitle extends StatelessWidget {
       color: Colors.white,
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+        padding: EdgeInsets.symmetric(horizontal: 40),
         margin: EdgeInsets.all(3),
         child: Row(
           children: [
             Text(
               userName,
-              style: TextStyle(),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Spacer(),
             Container(
-              padding: EdgeInsets.all(10),
+              // padding: EdgeInsets.all(),
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(

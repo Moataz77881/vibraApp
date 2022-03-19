@@ -27,13 +27,14 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
        backgroundColor: Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 1, 87, 207),
-        title: Text(
-          userDetails.userName,
-          style: TextStyle(color: Colors.white, fontSize: 20),
+        title: Image.asset(
+          'assets/images/vibra.png',
+          width: 120,
+          height: 120,
         ),
+        centerTitle: true,
       ),
       body: Container(
-        // color: Colors.white,
         margin: EdgeInsets.all(20),
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -41,6 +42,26 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Text(userDetails.userName,
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                  color: Colors.grey,
+                  width: 2,
+                  height: 1,
+                )),
+              ],
+            ),
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(12),

@@ -18,7 +18,7 @@ class _searchScreenState extends State<searchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(190, 250, 250, 250),
+      backgroundColor: Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 1, 87, 207),
         title: Image.asset(
@@ -29,46 +29,52 @@ class _searchScreenState extends State<searchScreen> {
         centerTitle: true,
       ),
       body: Container(
+        margin: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(30),
+              margin: EdgeInsets.all(20),
               child: Row(
                 children: [
                   Expanded(
                     child: TextFormField(
+                      textInputAction: TextInputAction.newline,
+                      autofocus: true,
+                      cursorColor: Colors.black,
                       keyboardType: TextInputType.text,
                       onChanged: (value) {
                         name = value;
                         setState(() {});
                       },
-                      // controller: userNameEditingController ,
                       decoration: InputDecoration(
-                          fillColor: Colors.white,
+                          fillColor: Color.fromARGB(190, 234, 233, 233),
                           filled: true,
                           hintText: 'Search',
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.elliptical(12, 12)),
+                                  BorderRadius.all(Radius.circular(25)),
                               borderSide: BorderSide(color: Colors.white))),
                     ),
                   ),
-                  GestureDetector(
-                    child: Container(
-                      margin: EdgeInsets.all(11),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          gradient: LinearGradient(colors: [
-                            const Color.fromARGB(255, 255, 255, 255),
-                            const Color.fromARGB(255, 255, 255, 255),
-                          ])),
-                      child: Image.asset(
-                        'assets/images/search-icon.webp',
-                        width: 35,
-                        height: 35,
-                      ),
-                    ),
-                  )
+                  // GestureDetector(
+                  //   child: Container(
+                  //     margin: EdgeInsets.all(11),
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(30),
+                  //         gradient: LinearGradient(colors: [
+                  //           const Color.fromARGB(255, 255, 255, 255),
+                  //           const Color.fromARGB(255, 255, 255, 255),
+                  //         ])),
+                  //     child: Image.asset(
+                  //       'assets/images/search-icon.webp',
+                  //       width: 35,
+                  //       height: 35,
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),
