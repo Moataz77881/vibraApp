@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
+import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
 import 'package:graduation_project/uIAndServices/chatDetails/messageWidget.dart';
 import 'package:provider/provider.dart';
 
 class chatDetailsScreen extends StatefulWidget {
   static const String routName = 'Chat details screen';
-
   @override
   State<chatDetailsScreen> createState() => _chatDetailsScreenState();
 }
@@ -24,7 +24,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
     provider = Provider.of<authProvider>(context);
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
-       backgroundColor: Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 1, 87, 207),
         title: Image.asset(
@@ -67,7 +67,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                 padding: EdgeInsets.all(12),
                 child: StreamBuilder<QuerySnapshot<messageData>>(
                   stream: messageData
-                      .withConverter(userDetails.uID, provider.user!.uID)
+                      .withConverter(provider.user!.uID, userDetails.uID)
                       .orderBy('dateTime', descending: false)
                       .snapshots(),
                   builder: (builder, snapshot) {
@@ -118,7 +118,9 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      sendMessage();
+                      if (message.text.isNotEmpty) {
+                        sendMessage();
+                      }
                     },
                     child: Row(
                       children: [
@@ -151,9 +153,27 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
       message.text = '';
     });
 
+    userDataUsersList _userDataUsersList = userDataUsersList(
+        userName: userDetails.userName,
+        phoneNumber: userDetails.phoneNumber,
+        chooseMood: userDetails.chooseMood,
+        uID: userDetails.uID,
+        dateTime: messageDataObject.dateTime);
+
+    userDataUsersList _userDataUsersListProvider = userDataUsersList(
+        userName: provider.user!.userName,
+        phoneNumber: provider.user!.phoneNumber,
+        chooseMood: provider.user!.chooseMood,
+        uID: provider.user!.uID,
+        dateTime: messageDataObject.dateTime);
+
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,
         userDetails.uID, messageDataObject.senderId); // id bta3 mohab
     var result2 = await setOrRetrieveData.addMessage(
         messageDataObject, messageDataObject.senderId, userDetails.uID);
+    setOrRetrieveData.getChatList(
+        messageDataObject.senderId, userDetails.uID, _userDataUsersList);
+    setOrRetrieveData.getChatList(userDetails.uID, messageDataObject.senderId,
+        _userDataUsersListProvider);
   }
 }

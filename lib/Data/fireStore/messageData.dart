@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 
 class messageData {
+  static const String collectionNameUserMessage = 'userMessages';
   static const String collectionName = 'messages';
   String id;
   String content;
@@ -36,7 +37,7 @@ class messageData {
     return userData
         .withConverter()
         .doc(userId) // to add new collection in user document
-        .collection('userMessages')
+        .collection(collectionNameUserMessage)
         .doc(senderId)
         .collection(collectionName) // user messages
         .withConverter(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
+import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
 
 class setOrRetrieveData {
   static Future<void> addUser(userData user) {
@@ -29,5 +30,10 @@ class setOrRetrieveData {
     message.id =
         docRef.id; // messages document id and message id are the same id
     return docRef.set(message); //set the message data in the document
+  }
+
+  static void getChatList(
+      String senderId, String receiverId, userDataUsersList user) async {
+    await userDataUsersList.withConverter(senderId).doc(receiverId).set(user);
   }
 }

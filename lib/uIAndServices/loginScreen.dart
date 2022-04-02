@@ -61,14 +61,16 @@ class loginScreen extends StatelessWidget {
                           if (formKey.currentState?.validate() == true) {
                             showLoading.show(context);
                             await _firebaseAuth.verifyPhoneNumber(
+                              // when the sms code is delivered the android will automatically verify the SMS code without requiring the user to manually input the code.
                               phoneNumber: userPhoneNumber,
                               verificationCompleted:
                                   (phoneAuthCredential) async {
+                                    // which can be used to sign in
                                 await _firebaseAuth
                                     .signInWithCredential(phoneAuthCredential)
                                     .then((value) {
                                   Navigator.pushNamed(
-                                      context, optionScreen.routeName); // todo
+                                      context, optionScreen.routeName);
                                 }).onError((error, stackTrace) {
                                   showMessage.show(context,
                                       'Account creation error'); // show dialog message

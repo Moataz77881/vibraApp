@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverChatList.dart';
+import 'package:graduation_project/uIAndServices/caregiverListDetails/caregiverChatList.dart';
 import 'package:graduation_project/uIAndServices/chatDetails/chatDetailsScreen.dart';
 import 'package:graduation_project/uIAndServices/deafblindChatList.dart';
 import 'package:graduation_project/uIAndServices/loginScreen.dart';

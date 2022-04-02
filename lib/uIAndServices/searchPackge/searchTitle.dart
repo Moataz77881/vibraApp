@@ -4,7 +4,6 @@ import 'package:graduation_project/uIAndServices/chatDetails/chatDetailsScreen.d
 
 class searchTitle extends StatelessWidget {
   String userName;
-
   userData? user;
 
   searchTitle({required this.userName, required this.user});
