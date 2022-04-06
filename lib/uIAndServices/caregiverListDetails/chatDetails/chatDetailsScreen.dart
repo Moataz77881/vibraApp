@@ -5,7 +5,7 @@ import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/chatDetails/messageWidget.dart';
+import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/messageWidget.dart';
 import 'package:provider/provider.dart';
 
 class chatDetailsScreen extends StatefulWidget {

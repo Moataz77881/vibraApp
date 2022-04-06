@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/chatDetails/RecievedMessageShow.dart';
-import 'package:graduation_project/uIAndServices/chatDetails/sendMessagesShow.dart';
+import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/RecievedMessageShow.dart';
+import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/sendMessagesShow.dart';
 import 'package:provider/provider.dart';
 
 class messageWidget extends StatelessWidget {

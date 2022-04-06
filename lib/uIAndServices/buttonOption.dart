@@ -4,7 +4,7 @@ import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
 import 'package:graduation_project/uIAndServices/caregiverListDetails/caregiverChatList.dart';
-import 'package:graduation_project/uIAndServices/deafblindChatList.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatList/deafblindChatList.dart';
 import 'package:graduation_project/utils/showLoading.dart';
 import 'package:graduation_project/utils/showMessage.dart';
 import 'package:provider/provider.dart';

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
 import 'package:graduation_project/uIAndServices/caregiverListDetails/caregiverChatList.dart';
-import 'package:graduation_project/uIAndServices/chatDetails/chatDetailsScreen.dart';
-import 'package:graduation_project/uIAndServices/deafblindChatList.dart';
+import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/chatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/typeMessage.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatList/deafblindChatList.dart';
 import 'package:graduation_project/uIAndServices/loginScreen.dart';
 import 'package:graduation_project/uIAndServices/optionScreen.dart';
 import 'package:graduation_project/uIAndServices/otpScreen.dart';
@@ -25,13 +27,18 @@ class myApp extends StatelessWidget {
             caregiverForeChatList(),
         deafblindChatList.routName: (BuildContext) => deafblindChatList(),
         searchScreen.routName: (BuildContext) => searchScreen(),
-        chatDetailsScreen.routName: (BuildContext) => chatDetailsScreen()
+        chatDetailsScreen.routName: (BuildContext) => chatDetailsScreen(),
+        deafblindChatDetailsScreen.routName: (BuildContext) =>
+            deafblindChatDetailsScreen(),
+        typeMessage.routName: (BuildContext) => typeMessage()
       },
-      initialRoute: provider.isVerifyed()
-          ? provider.user?.chooseMood == 'I am Caregiver'
-              ? deafblindChatList.routName
-              : caregiverForeChatList.routName
-          : splashScreen.routname,
+
+      initialRoute: deafblindChatList.routName,
+      // initialRoute: provider.isVerifyed()
+      //     ? provider.user?.chooseMood == 'I am Caregiver'
+      //         ? caregiverForeChatList.routName
+      //         : deafblindChatList.routName
+      //     : splashScreen.routname,
     );
   }
 }
