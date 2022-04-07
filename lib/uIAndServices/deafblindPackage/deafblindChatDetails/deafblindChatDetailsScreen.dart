@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/messageWidget.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/deafblindMessageWidget.dart';
 import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/typeMessage.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
@@ -39,7 +39,8 @@ class _deafblindChatDetailsScreenState
       body: SimpleGestureDetector(
         onHorizontalSwipe: (SwipeDirection direction) {
           if (direction == SwipeDirection.right) {
-            Navigator.pushNamed(context, typeMessage.routName);
+            Navigator.pushNamed(context, typeMessage.routName,
+                arguments: userDetails);
           } else if (direction == SwipeDirection.left) {
             Navigator.pop(context);
           }
@@ -108,7 +109,8 @@ class _deafblindChatDetailsScreenState
                       return ListView.builder(
                           itemCount: data.length,
                           itemBuilder: (BuildContext, index) {
-                            return messageWidget(data[index]);
+                            return deafblindMessageWidget(
+                                messageDataObject: data[index]);
                           });
                     },
                   ),

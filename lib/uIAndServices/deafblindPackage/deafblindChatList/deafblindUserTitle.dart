@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
+import 'package:graduation_project/uIAndServices/deafblindPackage/VibrateMorseText/vibrateInMorse.dart';
 import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
-import 'package:morse/morse.dart';
-import 'package:vibration/vibration.dart';
 
 class deafblindUserTitle extends StatefulWidget {
   userData? user;
@@ -19,8 +18,8 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
     return InkWell(
       onTap: () {
         setState(() {
-          // vibrateInMorse(widget.user!.userName);
-          vibrationTheText();
+          vibrateInMorse _vibrateInMorse = new vibrateInMorse();
+          _vibrateInMorse.vibrateInMorseText(widget.user!.userName);
         });
       },
       onDoubleTap: () {
@@ -55,24 +54,3 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
   }
 }
 
-void vibrateInMorse(String userName) {
-  final Morse morse = new Morse(userName);
-  var userNameMorse = morse.encode();
-  int i = 0;
-  if (i <= userNameMorse.length) {
-    // vibrationTheText(userNameMorse[i] , i);
-    i++;
-  }
-}
-
-Future<void> vibrationTheText() async {
-  List<int> pattern = [1000, 500, 100];
-  for (int i = 0; i < pattern.length; i++) {
-    await Vibration.vibrate(duration: pattern[i]);
-  }
-  // if(userNameMorse[i] == '.'){
-  //   await Vibration.vibrate(duration: 500 );
-  // }else if(userNameMorse[i] == '-'){
-  //   await Vibration.vibrate(duration: 1000);
-  // }
-}
