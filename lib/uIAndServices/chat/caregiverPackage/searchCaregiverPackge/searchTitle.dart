@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/chatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/chatDetails/chatDetailsScreen.dart';
 
 class searchTitle extends StatelessWidget {
   String userName;

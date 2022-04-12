@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
+import 'package:graduation_project/Data/localData/localUserData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/caregiverChatList.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatList/deafblindChatList.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/caregiverChatListDetails/caregiverChatList.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatList/deafblindChatList.dart';
 import 'package:graduation_project/utils/showLoading.dart';
 import 'package:graduation_project/utils/showMessage.dart';
 import 'package:provider/provider.dart';
@@ -51,14 +52,17 @@ class buttonOption extends StatelessWidget {
                           .getDataById(_firebaseAuth.currentUser!.uid);
                       if (fireStoreUser != null) {
                         //todo provider
-                        provider.updateUser(fireStoreUser);
+                        // provider.updateUser(fireStoreUser);
+                        // todo save user data in local device
+                        localUserData.setUserData(userName, phoneNumber,
+                            _firebaseAuth.currentUser!.uid, option);
                         if (option == 'I am Caregiver') {
                           showLoading();
                           showMessage.show(
                               context, 'account created successfully');
                           Navigator.pushReplacementNamed(
                               context,
-                              caregiverForeChatList
+                              caregiverChatList
                                   .routName); //push to the next screen without back to the register screen
                         } else if (option == 'I am Blind - Deaf') {
                           showMessage.show(

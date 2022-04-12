@@ -1,14 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/Data/localData/localUserData.dart';
 import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/caregiverChatList.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/chatDetailsScreen.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/typeMessage.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatList/deafblindChatList.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/caregiverChatListDetails/caregiverChatList.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/chatDetails/chatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/searchCaregiverPackge/searchScreen.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatDetails/typeMessage.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatList/deafblindChatList.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/searchDeafblindPackage/searchScreenList.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/searchDeafblindPackage/typeTextSearchScreen.dart';
 import 'package:graduation_project/uIAndServices/loginScreen.dart';
 import 'package:graduation_project/uIAndServices/optionScreen.dart';
 import 'package:graduation_project/uIAndServices/otpScreen.dart';
-import 'package:graduation_project/uIAndServices/searchPackge/searchScreen.dart';
 import 'package:graduation_project/uIAndServices/splashScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -23,22 +27,21 @@ class myApp extends StatelessWidget {
         optionScreen.routeName: (BuildContext) => optionScreen(),
         splashScreen.routname: (BuildContext) => splashScreen(),
         otpScreen.routName: (BuildContext) => otpScreen(),
-        caregiverForeChatList.routName: (BuildContext) =>
-            caregiverForeChatList(),
+        caregiverChatList.routName: (BuildContext) => caregiverChatList(),
         deafblindChatList.routName: (BuildContext) => deafblindChatList(),
         searchScreen.routName: (BuildContext) => searchScreen(),
         chatDetailsScreen.routName: (BuildContext) => chatDetailsScreen(),
         deafblindChatDetailsScreen.routName: (BuildContext) =>
             deafblindChatDetailsScreen(),
-        typeMessage.routName: (BuildContext) => typeMessage()
+        typeMessage.routName: (BuildContext) => typeMessage(),
+        typeTextSearchScreen.routName: (BuildContext) => typeTextSearchScreen(),
+        searchScreenList.routName: (BuildContext) => searchScreenList()
       },
-
-      initialRoute: deafblindChatList.routName,
-      // initialRoute: provider.isVerifyed()
-      //     ? provider.user?.chooseMood == 'I am Caregiver'
-      //         ? caregiverForeChatList.routName
-      //         : deafblindChatList.routName
-      //     : splashScreen.routname,
+      initialRoute: FirebaseAuth.instance.currentUser != null
+          ? localUserData.getChooseMood() == 'I am Caregiver'
+              ? caregiverChatList.routName
+              : deafblindChatList.routName
+          : splashScreen.routname,
     );
   }
 }

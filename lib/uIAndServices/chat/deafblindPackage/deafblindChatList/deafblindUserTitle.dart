@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/VibrateMorseText/vibrateInMorse.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrateInMorse.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrationInAction.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatDetails/deafblindChatDetailsScreen.dart';
 
-class deafblindUserTitle extends StatefulWidget {
+class deafblindUserTitle extends StatelessWidget {
+  static const String routName = 'deafblindUserTitle';
   userData? user;
 
   deafblindUserTitle({required this.user});
 
-  @override
-  State<deafblindUserTitle> createState() => _deafblindUserTitleState();
-}
+  vibrateInMorse _vibrateInMorse = new vibrateInMorse();
+  vibrationInAction _vibrateInAction = new vibrationInAction();
 
-class _deafblindUserTitleState extends State<deafblindUserTitle> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          vibrateInMorse _vibrateInMorse = new vibrateInMorse();
-          _vibrateInMorse.vibrateInMorseText(widget.user!.userName);
-        });
+        _vibrateInMorse.vibrateInMorseText(user!.userName);
       },
       onDoubleTap: () {
         Navigator.pushNamed(context, deafblindChatDetailsScreen.routName,
-            arguments: widget.user);
+            arguments: user);
+        _vibrateInAction.vibrateInAction();
       },
       child: Container(
         padding: EdgeInsets.all(5),
@@ -39,14 +37,17 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
                   borderRadius: BorderRadius.circular(40)),
               child: Center(
                   child: Text(
-                widget.user!.userName.substring(0, 1),
+                user!.userName.substring(0, 1),
                 style: TextStyle(color: Colors.white),
               )),
             ),
             SizedBox(
               width: 8,
             ),
-            Container(child: Text(widget.user!.userName))
+            Container(
+                child: Text(user != null
+                    ? user!.userName
+                    : deafblindUserTitle.routName))
           ],
         ),
       ),

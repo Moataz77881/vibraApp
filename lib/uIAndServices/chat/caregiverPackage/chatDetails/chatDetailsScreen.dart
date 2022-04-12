@@ -4,12 +4,12 @@ import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
-import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/chatDetails/messageWidget.dart';
-import 'package:provider/provider.dart';
+import 'package:graduation_project/Data/localData/localUserData.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/chatDetails/messageWidget.dart';
 
 class chatDetailsScreen extends StatefulWidget {
   static const String routName = 'Chat details screen';
+
   @override
   State<chatDetailsScreen> createState() => _chatDetailsScreenState();
 }
@@ -17,11 +17,9 @@ class chatDetailsScreen extends StatefulWidget {
 class _chatDetailsScreenState extends State<chatDetailsScreen> {
   late userData userDetails;
   TextEditingController message = new TextEditingController();
-  late authProvider provider;
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<authProvider>(context);
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
       backgroundColor: Color.fromARGB(206, 250, 250, 251),
@@ -67,7 +65,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                 padding: EdgeInsets.all(12),
                 child: StreamBuilder<QuerySnapshot<messageData>>(
                   stream: messageData
-                      .withConverter(provider.user!.uID, userDetails.uID)
+                      .withConverter(localUserData.getUId(), userDetails.uID)
                       .orderBy('dateTime', descending: false)
                       .snapshots(),
                   builder: (builder, snapshot) {
@@ -147,7 +145,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         id: '',
         content: message.text,
         dateTime: DateTime.now(),
-        senderId: provider.user!.uID);
+        senderId: localUserData.getUId());
 
     setState(() {
       message.text = '';
@@ -160,11 +158,11 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         uID: userDetails.uID,
         dateTime: messageDataObject.dateTime);
 
-    userDataUsersList _userDataUsersListProvider = userDataUsersList(
-        userName: provider.user!.userName,
-        phoneNumber: provider.user!.phoneNumber,
-        chooseMood: provider.user!.chooseMood,
-        uID: provider.user!.uID,
+    userDataUsersList _userDataUsersListCurrentUser = userDataUsersList(
+        userName: localUserData.getUserName(),
+        phoneNumber: localUserData.getPhoneNumber(),
+        chooseMood: localUserData.getChooseMood(),
+        uID: localUserData.getUId(),
         dateTime: messageDataObject.dateTime);
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,
@@ -174,6 +172,6 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
     setOrRetrieveData.getChatList(
         messageDataObject.senderId, userDetails.uID, _userDataUsersList);
     setOrRetrieveData.getChatList(userDetails.uID, messageDataObject.senderId,
-        _userDataUsersListProvider);
+        _userDataUsersListCurrentUser);
   }
 }

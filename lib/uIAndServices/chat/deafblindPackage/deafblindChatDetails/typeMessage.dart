@@ -3,9 +3,9 @@ import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
-import 'package:graduation_project/Data/providers/authProvider.dart';
+import 'package:graduation_project/Data/localData/localUserData.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrationInAction.dart';
 import 'package:morse/morse.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 class typeMessage extends StatefulWidget {
@@ -18,12 +18,12 @@ class typeMessage extends StatefulWidget {
 class _typeMessageState extends State<typeMessage> {
   String contentMessage = '';
   late userData userDetails;
-  late authProvider provider;
   String textMessage = '';
+
+  vibrationInAction _vibrateInAction = new vibrationInAction();
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<authProvider>(context);
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +55,7 @@ class _typeMessageState extends State<typeMessage> {
                       onPressed: () {
                         //todo .
                         contentMessage += '.';
+                        _vibrateInAction.vibrationTheText('.');
                         print(contentMessage);
                       },
                       child: Text(
@@ -69,6 +70,7 @@ class _typeMessageState extends State<typeMessage> {
                   onLongPress: () {
                     // todo -
                     contentMessage += '-';
+                    _vibrateInAction.vibrationTheText('-');
                     print(contentMessage);
                   },
                   onDoubleTap: () {
@@ -77,6 +79,7 @@ class _typeMessageState extends State<typeMessage> {
                     Morse morse = new Morse(contentMessage);
                     textMessage = morse.decode();
                     sendMessage();
+                    _vibrateInAction.vibrateInAction();
                     Navigator.pop(context);
                   },
                 ),
@@ -84,9 +87,11 @@ class _typeMessageState extends State<typeMessage> {
                   setState(() {
                     if (direction == SwipeDirection.down) {
                       contentMessage += ' / ';
+                      _vibrateInAction.vibrateInAction();
                       print(contentMessage);
                     } else if (direction == SwipeDirection.up) {
                       contentMessage += ' ';
+                      _vibrateInAction.vibrateInAction();
                       print(contentMessage);
                     }
                   });
@@ -97,10 +102,12 @@ class _typeMessageState extends State<typeMessage> {
                       if (contentMessage != null && contentMessage.length > 0) {
                         contentMessage = contentMessage.substring(
                             0, contentMessage.length - 1);
+                        _vibrateInAction.vibrateInAction();
                         print(contentMessage);
                       }
                     } else if (direction == SwipeDirection.left) {
                       Navigator.pop(context);
+                      _vibrateInAction.vibrateInAction();
                     }
                   });
                 },
@@ -117,7 +124,7 @@ class _typeMessageState extends State<typeMessage> {
         id: '',
         content: textMessage,
         dateTime: DateTime.now(),
-        senderId: provider.user!.uID);
+        senderId: localUserData.getUId());
 
     userDataUsersList _userDataUsersList = userDataUsersList(
         userName: userDetails.userName,
@@ -127,10 +134,10 @@ class _typeMessageState extends State<typeMessage> {
         dateTime: messageDataObject.dateTime);
 
     userDataUsersList _userDataUsersListProvider = userDataUsersList(
-        userName: provider.user!.userName,
-        phoneNumber: provider.user!.phoneNumber,
-        chooseMood: provider.user!.chooseMood,
-        uID: provider.user!.uID,
+        userName: localUserData.getUserName(),
+        phoneNumber: localUserData.getPhoneNumber(),
+        chooseMood: localUserData.getChooseMood(),
+        uID: localUserData.getUId(),
         dateTime: messageDataObject.dateTime);
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,

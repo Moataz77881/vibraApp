@@ -2,19 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
-import 'package:graduation_project/Data/providers/authProvider.dart';
-import 'package:graduation_project/uIAndServices/caregiverListDetails/userTitle.dart';
-import 'package:graduation_project/uIAndServices/searchPackge/searchScreen.dart';
-import 'package:provider/provider.dart';
+import 'package:graduation_project/Data/localData/localUserData.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/caregiverChatListDetails/userTitle.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/searchCaregiverPackge/searchScreen.dart';
 
-class caregiverForeChatList extends StatelessWidget {
-  static const String routName = 'caregiverForeChatList';
-
-  late authProvider provider;
+class caregiverChatList extends StatelessWidget {
+  static const String routName = 'caregiverChatList';
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<authProvider>(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
@@ -50,14 +46,14 @@ class caregiverForeChatList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40)),
                   child: Center(
                       child: Text(
-                      provider.user!.userName.substring(0, 1),
+                        localUserData.getUserName().substring(0, 1),
                     style: TextStyle(color: Colors.white),
                   )),
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    provider.user!.userName,
+                    localUserData.getUserName(),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 )
@@ -79,7 +75,7 @@ class caregiverForeChatList extends StatelessWidget {
                 child: Container(
                     child: StreamBuilder<QuerySnapshot<userDataUsersList>>(
               stream: userDataUsersList
-                  .withConverter(provider.user!.uID)
+                  .withConverter(localUserData.getUId())
                   .orderBy('dateTime', descending: true)
                   .snapshots(),
               builder: (builder, snapshot) {
@@ -91,23 +87,23 @@ class caregiverForeChatList extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 }
-                var user = snapshot.data!.docs.map((e) => e.data()).toList();
-                if (user != null) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: user.length,
-                      itemBuilder: (BuildContext, index) {
-                        var _user = userData(
-                            userName: user.elementAt(index).userName,
-                            phoneNumber: user.elementAt(index).phoneNumber,
-                            uID: user.elementAt(index).uID,
-                            chooseMood: user.elementAt(index).chooseMood);
-                        return userTitle(
+                var user = snapshot.data!.docs
+                    .map((e) => e.data())
+                    .toList(); // userDataList
+
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: user.length,
+                    itemBuilder: (BuildContext, index) {
+                      var _user = userData(
+                          userName: user.elementAt(index).userName,
+                          phoneNumber: user.elementAt(index).phoneNumber,
+                          uID: user.elementAt(index).uID,
+                          chooseMood: user.elementAt(index).chooseMood);
+                      return userTitle(
                           user: _user,
                         );
                       });
-                } else
-                  return Container();
               },
             )))
           ],

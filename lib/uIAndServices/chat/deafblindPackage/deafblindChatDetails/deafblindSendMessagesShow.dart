@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/uIAndServices/deafblindPackage/VibrateMorseText/vibrateInMorse.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrateInMorse.dart';
 
 class deafblindSendMessagesShow extends StatelessWidget {
   String content;

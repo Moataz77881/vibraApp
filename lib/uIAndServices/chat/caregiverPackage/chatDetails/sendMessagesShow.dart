@@ -6,8 +6,6 @@ class sendMessagesShow extends StatelessWidget {
 
   sendMessagesShow(this.content, this.time);
 
-  // String result = DateTime.parse(time) as String;
-
   @override
   Widget build(BuildContext context) {
     return Row(

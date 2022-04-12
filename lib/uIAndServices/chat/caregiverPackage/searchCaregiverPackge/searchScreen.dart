@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
-import 'package:graduation_project/uIAndServices/searchPackge/searchTitle.dart';
+import 'package:graduation_project/uIAndServices/chat/caregiverPackage/searchCaregiverPackge/searchTitle.dart';
 
 class searchScreen extends StatefulWidget {
   static const String routName = 'search screen';
@@ -59,22 +59,6 @@ class _searchScreenState extends State<searchScreen> {
                               borderSide: BorderSide(color: Colors.white))),
                     ),
                   ),
-                  // GestureDetector(
-                  //   child: Container(
-                  //     margin: EdgeInsets.all(11),
-                  //     decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(30),
-                  //         gradient: LinearGradient(colors: [
-                  //           const Color.fromARGB(255, 255, 255, 255),
-                  //           const Color.fromARGB(255, 255, 255, 255),
-                  //         ])),
-                  //     child: Image.asset(
-                  //       'assets/images/search-icon.webp',
-                  //       width: 35,
-                  //       height: 35,
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),
