@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/uIAndServices/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/loginPackage/loginScreen.dart';
 
 class splashScreen extends StatelessWidget {
   static const String routname = 'splashScreen';

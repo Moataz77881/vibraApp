@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/uIAndServices/loginScreen.dart';
-import 'package:graduation_project/uIAndServices/optionScreen.dart';
+import 'package:graduation_project/uIAndServices/loginPackage/loginScreen.dart';
+import 'package:graduation_project/uIAndServices/loginPackage/optionScreen.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class textFieldBorderPhoneNumber extends StatelessWidget {
   static const String hintText = 'phone';
   static const routName = 'PhoneNumber';
   String initialCountry = 'EG';
-  PhoneNumber _number = PhoneNumber(isoCode: 'EG');
+  final PhoneNumber _number = PhoneNumber(isoCode: 'EG');
 
   @override
   Widget build(BuildContext context) {

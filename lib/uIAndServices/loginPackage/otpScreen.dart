@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/argData/athDataUtils.dart';
-import 'package:graduation_project/uIAndServices/optionScreen.dart';
+import 'package:graduation_project/uIAndServices/loginPackage/optionScreen.dart';
 import 'package:graduation_project/utils/showMessage.dart';
 
 class otpScreen extends StatelessWidget {

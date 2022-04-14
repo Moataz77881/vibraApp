@@ -4,7 +4,7 @@ import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 
 class authProvider extends ChangeNotifier {
-  userData? user;
+  userData? user = null;
 
   authProvider() {
     fetchFireStoreUserData();
@@ -16,10 +16,7 @@ class authProvider extends ChangeNotifier {
   }
 
   bool isVerifyed() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      return true;
-    } else
-      return false;
+    return FirebaseAuth.instance.currentUser != null;
   } // to make sure the user is verified
 
   void fetchFireStoreUserData() async {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/Data/localData/localUserData.dart';
+import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrateMessages.dart';
 import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrationInAction.dart';
 import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatDetails/deafblindMessageWidget.dart';
 import 'package:graduation_project/uIAndServices/chat/deafblindPackage/deafblindChatDetails/typeMessage.dart';
@@ -20,17 +21,20 @@ class _deafblindChatDetailsScreenState
     extends State<deafblindChatDetailsScreen> {
   late userData userDetails;
 
+  int size = 50;
   List<String> listOfContent = [];
-
-  vibrationInAction _vibrateInAction = new vibrationInAction();
+  List<String> listOfContentCopy = [];
+  List<String> listOfNewMessage = [];
+  final vibrationInAction _vibrateInAction = vibrationInAction();
+  final vibrateMessages _vibrateMessages = vibrateMessages();
 
   @override
   Widget build(BuildContext context) {
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
-      backgroundColor: Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
         title: Image.asset(
           'assets/images/vibra.png',
           width: 120,
@@ -39,9 +43,18 @@ class _deafblindChatDetailsScreenState
         centerTitle: true,
       ),
       body: InkWell(
-        onDoubleTap: () {
+        onDoubleTap: () async {
           print(listOfContent);
-          _vibrateInAction.vibrateInAction();
+          if (listOfContent.isNotEmpty) {
+            listOfContentCopy = [];
+            for (int i = listOfContent.length - 1; i >= 0; i--) {
+              listOfContentCopy.add(listOfContent[i]);
+            }
+          }
+          _vibrateMessages.vibrateMessagesChat(listOfContentCopy);
+
+          print(listOfContentCopy);
+          listOfContent = [];
         },
         child: SimpleGestureDetector(
           onHorizontalSwipe: (SwipeDirection direction) {
@@ -55,9 +68,9 @@ class _deafblindChatDetailsScreenState
             }
           },
           child: Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(12),
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
@@ -65,23 +78,23 @@ class _deafblindChatDetailsScreenState
                 Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 1, 87, 207),
+                          color: const Color.fromARGB(255, 1, 87, 207),
                           borderRadius: BorderRadius.circular(40)),
                       child: Center(
                           child: Text(
                         userDetails.userName.substring(0, 1),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       )),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(userDetails.userName,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.bold)),
                     ),
                   ],
@@ -98,7 +111,7 @@ class _deafblindChatDetailsScreenState
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     child: StreamBuilder<QuerySnapshot<messageData>>(
                       stream: messageData
                           .withConverter(
@@ -110,27 +123,32 @@ class _deafblindChatDetailsScreenState
                           return Center(child: Text(snapshot.error.toString()));
                         } else if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         }
                         var data = snapshot.data!.docs
                             .map((doc) => doc.data())
                             .toList();
-
-                        // if(data != null && data.isNotEmpty){
-                        //   for(int i=data.length-2 ; i>=0; i--){
-                        //     if(data[i].senderId == userDetails.uID){
-                        //       listOfContent[i] = data[i].content;
-                        //     }
-                        //     if(data[i-1].senderId == localUserData.getUId()){
-                        //       break;
-                        //     }
-                        //   }
-                        // }
+                        if (data.isNotEmpty) {
+                          for (int i = data.length - 1; i >= 0; i--) {
+                            if (data[i].senderId != localUserData.getUId()) {
+                              listOfContent.add(data[i].content);
+                              if (data.length > 1) {
+                                if (data[i - 1].senderId ==
+                                    localUserData.getUId()) {
+                                  break;
+                                }
+                              }
+                            } else {
+                              listOfContentCopy = [];
+                              break;
+                            }
+                          }
+                        }
                         return ListView.builder(
                             itemCount: data.length,
-                            itemBuilder: (BuildContext, index) {
+                            itemBuilder: (buildContext, index) {
                               return deafblindMessageWidget(
                                   messageDataObject: data[index]);
                             });
