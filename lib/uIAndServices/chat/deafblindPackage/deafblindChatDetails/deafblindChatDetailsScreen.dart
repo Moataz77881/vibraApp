@@ -20,11 +20,11 @@ class deafblindChatDetailsScreen extends StatefulWidget {
 class _deafblindChatDetailsScreenState
     extends State<deafblindChatDetailsScreen> {
   late userData userDetails;
-
-  int size = 50;
+  int size = 0;
   List<String> listOfContent = [];
   List<String> listOfContentCopy = [];
   List<String> listOfNewMessage = [];
+  List<String> contentMessages = [];
   final vibrationInAction _vibrateInAction = vibrationInAction();
   final vibrateMessages _vibrateMessages = vibrateMessages();
 
@@ -43,18 +43,32 @@ class _deafblindChatDetailsScreenState
         centerTitle: true,
       ),
       body: InkWell(
-        onDoubleTap: () async {
-          print(listOfContent);
+        onDoubleTap: () {
           if (listOfContent.isNotEmpty) {
             listOfContentCopy = [];
             for (int i = listOfContent.length - 1; i >= 0; i--) {
               listOfContentCopy.add(listOfContent[i]);
             }
           }
-          _vibrateMessages.vibrateMessagesChat(listOfContentCopy);
-
+          // _vibrateMessages.vibrateMessagesChat(listOfContentCopy);
           print(listOfContentCopy);
           listOfContent = [];
+        },
+        onTap: () {
+          if (listOfContent.isNotEmpty) {
+            if (listOfContentCopy.isNotEmpty) {
+              if (listOfContent.length != listOfContentCopy.length) {
+                size = listOfContent.length - listOfContentCopy.length;
+                for (int i = size - 1; i >= 0; i--) {
+                  listOfContentCopy.add(listOfContent[i]);
+                  listOfNewMessage.add(listOfContent[i]);
+                }
+                listOfContent = [];
+              }
+            }
+          }
+          _vibrateMessages.vibrateMessagesChat(listOfNewMessage);
+          print(listOfNewMessage);
         },
         child: SimpleGestureDetector(
           onHorizontalSwipe: (SwipeDirection direction) {
@@ -131,17 +145,22 @@ class _deafblindChatDetailsScreenState
                             .map((doc) => doc.data())
                             .toList();
                         if (data.isNotEmpty) {
+                          listOfNewMessage = [];
                           for (int i = data.length - 1; i >= 0; i--) {
                             if (data[i].senderId != localUserData.getUId()) {
-                              listOfContent.add(data[i].content);
-                              if (data.length > 1) {
+                              contentMessages.add(data[i].content);
+                              listOfContent = contentMessages;
+                              if (i == 0) {
+                                contentMessages = [];
+                              }
+                              if (i > 1) {
                                 if (data[i - 1].senderId ==
                                     localUserData.getUId()) {
+                                  contentMessages = [];
                                   break;
                                 }
                               }
                             } else {
-                              listOfContentCopy = [];
                               break;
                             }
                           }
