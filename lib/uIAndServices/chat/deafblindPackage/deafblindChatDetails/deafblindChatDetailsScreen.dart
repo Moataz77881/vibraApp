@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/messageData.dart';
+import 'package:graduation_project/Data/fireStore/setOrRetrieveData.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
+import 'package:graduation_project/Data/fireStore/userDataUsersList.dart';
 import 'package:graduation_project/Data/localData/localUserData.dart';
 import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrateMessages.dart';
 import 'package:graduation_project/uIAndServices/chat/deafblindPackage/VibrateMorseText/vibrationInAction.dart';
@@ -27,6 +29,7 @@ class _deafblindChatDetailsScreenState
   List<String> contentMessages = [];
   final vibrationInAction _vibrateInAction = vibrationInAction();
   final vibrateMessages _vibrateMessages = vibrateMessages();
+  late DateTime lastMessageDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class _deafblindChatDetailsScreenState
               listOfContentCopy.add(listOfContent[i]);
             }
           }
-          // _vibrateMessages.vibrateMessagesChat(listOfContentCopy);
+          _vibrateMessages.vibrateMessagesChat(listOfContentCopy);
           print(listOfContentCopy);
           listOfContent = [];
         },
@@ -78,6 +81,17 @@ class _deafblindChatDetailsScreenState
               _vibrateInAction.vibrateInAction();
             } else if (direction == SwipeDirection.left) {
               Navigator.pop(context);
+              //todo flag false
+              var user = userDataUsersList(
+                  uID: userDetails.uID,
+                  userName: userDetails.userName,
+                  phoneNumber: userDetails.phoneNumber,
+                  dateTime: lastMessageDateTime,
+                  chooseMood: userDetails.chooseMood,
+                  senderId: localUserData.getUId(),
+                  flag: 'false');
+              setOrRetrieveData.updateChatList(
+                  localUserData.getUId(), userDetails.uID, user);
               _vibrateInAction.vibrateInAction();
             }
           },
@@ -147,10 +161,14 @@ class _deafblindChatDetailsScreenState
                         if (data.isNotEmpty) {
                           listOfNewMessage = [];
                           for (int i = data.length - 1; i >= 0; i--) {
+                            if (i == data.length - 1) {
+                              lastMessageDateTime = data[i].dateTime;
+                            }
                             if (data[i].senderId != localUserData.getUId()) {
                               contentMessages.add(data[i].content);
                               listOfContent = contentMessages;
                               if (i == 0) {
+                                //todo
                                 contentMessages = [];
                               }
                               if (i > 1) {

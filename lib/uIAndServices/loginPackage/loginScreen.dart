@@ -21,7 +21,7 @@ class loginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 1, 87, 207),
+      backgroundColor: const Color.fromARGB(255, 1, 87, 207),
       // #0046A8 Inputs #0F6FFF continue button
       body: Form(
         key: formKey,
@@ -38,20 +38,20 @@ class loginScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 11),
+                  margin: const EdgeInsets.symmetric(vertical: 11),
                   child: textFieldBorderUsername()),
               textFieldBorderPhoneNumber(),
               Container(
-                margin: EdgeInsets.all(11),
+                margin: const EdgeInsets.all(11),
                 child: Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 15, 111, 255)),
+                              const Color.fromARGB(255, 15, 111, 255)),
                           shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
+                              const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                       Radius.elliptical(15, 15)))),
                           padding:
@@ -69,12 +69,14 @@ class loginScreen extends StatelessWidget {
                                 await _firebaseAuth
                                     .signInWithCredential(phoneAuthCredential)
                                     .then((value) {
-                                  Navigator.pushNamed(
-                                      context, optionScreen.routeName);
+                                  // Navigator.pushNamed(
+                                  //     context, optionScreen.routeName);
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      optionScreen.routeName, (route) => false);
                                 }).onError((error, stackTrace) {
                                   showMessage.show(context,
                                       'Account creation error'); // show dialog message
-                                }).timeout(Duration(seconds: 10),
+                                }).timeout(const Duration(seconds: 10),
                                         onTimeout: () {
                                   showMessage.show(context,
                                       'cannot connect to server'); // show dialog message
@@ -100,13 +102,13 @@ class loginScreen extends StatelessWidget {
                             }
                           }
                         },
-                        child: Text('Verify'),
+                        child: const Text('Verify'),
                       ),
                     ),
                   ],
                 ),
               ),
-              Spacer(
+              const Spacer(
                 flex: 5,
               )
             ],

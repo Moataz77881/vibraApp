@@ -32,8 +32,16 @@ class setOrRetrieveData {
     return docRef.set(message); //set the message data in the document
   }
 
-  static void getChatList(
+  static void setChatList(
       String senderId, String receiverId, userDataUsersList user) async {
     await userDataUsersList.withConverter(senderId).doc(receiverId).set(user);
+  }
+
+  static void updateChatList(
+      String senderId, String receiverId, userDataUsersList user) async {
+    await userDataUsersList
+        .withConverter(senderId)
+        .doc(receiverId)
+        .update(user.toFireStore());
   }
 }

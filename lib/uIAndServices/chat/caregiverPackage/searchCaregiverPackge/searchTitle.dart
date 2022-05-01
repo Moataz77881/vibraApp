@@ -14,31 +14,31 @@ class searchTitle extends StatelessWidget {
       color: Colors.white,
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        margin: EdgeInsets.all(3),
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        margin: const EdgeInsets.all(3),
         child: Row(
           children: [
             Text(
               userName,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               // padding: EdgeInsets.all(),
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 15, 111, 255)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      const Color.fromARGB(255, 15, 111, 255)),
+                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(15, 15)))),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, chatDetailsScreen.routName,
                       arguments: user);
                 },
-                child: Text('message'),
+                child: const Text('message'),
               ),
             )
           ],

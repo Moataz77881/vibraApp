@@ -9,7 +9,7 @@ class vibrateMessages extends vibrationInAction {
       final Morse morse = Morse(message);
       var messageInMorse = morse.encode();
       if (i > 0) {
-        await Future.delayed(const Duration(milliseconds: 2500));
+        await Future.delayed(const Duration(milliseconds: 3000));
       }
       for (int i = 0; i < messageInMorse.length; i++) {
         if (messageInMorse[i] == '.') {

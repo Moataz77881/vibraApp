@@ -12,7 +12,7 @@ class textFieldBorderPhoneNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: InternationalPhoneNumberInput(
         onInputChanged: (PhoneNumber number) {
           loginScreen.userPhoneNumber = number.toString();
@@ -25,8 +25,8 @@ class textFieldBorderPhoneNumber extends StatelessWidget {
         },
         cursorColor: Colors.white,
         keyboardType: TextInputType.phone,
-        textStyle: TextStyle(color: Colors.white),
-        inputDecoration: InputDecoration(
+        textStyle: const TextStyle(color: Colors.white),
+        inputDecoration: const InputDecoration(
             filled: true,
             fillColor: Color.fromARGB(255, 0, 70, 168),
             hintText: hintText,

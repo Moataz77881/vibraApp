@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp();
   await localUserData.init();
   runApp(ChangeNotifierProvider<authProvider>(
-      create: (BuildContext) => authProvider(),
+      create: (buildContext) => authProvider(),
       // callback function returns an object of class authProvider
       child: myApp()));
   // callback function returns an object of class authProvider

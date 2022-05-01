@@ -17,67 +17,64 @@ class otpScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 1, 87, 207),
+      backgroundColor: const Color.fromARGB(255, 1, 87, 207),
       body: Column(
         children: [
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: TextFormField(
-                controller: otpController,
-                cursorColor: Colors.white,
-                keyboardType: TextInputType.text,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 0, 70, 168),
-                    hintText: 'Enter OTP',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(15, 15)),
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 70, 168)))),
-              ),
+            child: TextFormField(
+              controller: otpController,
+              cursorColor: Colors.white,
+              keyboardType: TextInputType.text,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 0, 70, 168),
+                  hintText: 'Enter OTP',
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Container(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 15, 111, 255)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.elliptical(15, 15)))),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                      ),
-                      onPressed: () async {
-                        PhoneAuthCredential phoneAuthCredential =
-                            PhoneAuthProvider.credential(
-                                verificationId: verificationId,
-                                smsCode: otpController.text);
-                        signInWithCredential(phoneAuthCredential, context);
-                      },
-                      child: Text(
-                        'Send',
-                        style: TextStyle(color: Colors.white),
-                      ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 15, 111, 255)),
+                      shape: MaterialStateProperty.all(
+                          const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.elliptical(15, 15)))),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(20)),
+                    ),
+                    onPressed: () async {
+                      PhoneAuthCredential phoneAuthCredential =
+                          PhoneAuthProvider.credential(
+                              verificationId: verificationId,
+                              smsCode: otpController.text);
+                      signInWithCredential(phoneAuthCredential, context);
+                    },
+                    child: const Text(
+                      'Send',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Spacer()
+          const Spacer()
         ],
       ),
     );
@@ -90,7 +87,9 @@ class otpScreen extends StatelessWidget {
           await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCredential.user != null) {
-        Navigator.pushNamed(context, optionScreen.routeName);
+        // Navigator.pushNamed(context, optionScreen.routeName);
+        Navigator.pushNamedAndRemoveUntil(
+            context, optionScreen.routeName, (route) => false);
       }
     } on FirebaseAuthException catch (e) {
       showMessage.show(context, e.toString());

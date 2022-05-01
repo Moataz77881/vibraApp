@@ -12,8 +12,8 @@ class recievedMessageShow extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(12),
+          decoration: const BoxDecoration(
               color: Color.fromARGB(255, 222, 222, 222),
               borderRadius: BorderRadius.all(Radius.circular(24))),
           child: Text(

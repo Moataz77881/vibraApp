@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/uIAndServices/chat/caregiverPackage/searchCaregiverPackge/searchTitle.dart';
 
@@ -18,9 +17,9 @@ class _searchScreenState extends State<searchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
         title: Image.asset(
           "assets/images/vibra.png",
           width: 120,
@@ -29,14 +28,14 @@ class _searchScreenState extends State<searchScreen> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.all(20),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               child: Row(
                 children: [
                   Expanded(
@@ -49,7 +48,7 @@ class _searchScreenState extends State<searchScreen> {
                         name = value;
                         setState(() {});
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           fillColor: Color.fromARGB(190, 234, 233, 233),
                           filled: true,
                           hintText: 'Search',
@@ -79,7 +78,7 @@ class _searchScreenState extends State<searchScreen> {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

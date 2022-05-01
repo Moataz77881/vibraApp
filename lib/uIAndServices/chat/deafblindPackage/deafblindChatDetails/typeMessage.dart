@@ -76,7 +76,7 @@ class _typeMessageState extends State<typeMessage> {
                   onDoubleTap: () {
                     // todo send message
                     // Navigator.pop(context);
-                    Morse morse = new Morse(contentMessage);
+                    Morse morse = Morse(contentMessage);
                     textMessage = morse.decode();
                     sendMessage();
                     _vibrateInAction.vibrateInAction();
@@ -99,7 +99,7 @@ class _typeMessageState extends State<typeMessage> {
                 onHorizontalSwipe: (SwipeDirection direction) {
                   setState(() {
                     if (direction == SwipeDirection.right) {
-                      if (contentMessage != null && contentMessage.length > 0) {
+                      if (contentMessage.isNotEmpty) {
                         contentMessage = contentMessage.substring(
                             0, contentMessage.length - 1);
                         _vibrateInAction.vibrateInAction();
@@ -131,22 +131,26 @@ class _typeMessageState extends State<typeMessage> {
         phoneNumber: userDetails.phoneNumber,
         chooseMood: userDetails.chooseMood,
         uID: userDetails.uID,
-        dateTime: messageDataObject.dateTime);
+        dateTime: messageDataObject.dateTime,
+        senderId: messageDataObject.senderId,
+        flag: 'false');
 
     userDataUsersList _userDataUsersListProvider = userDataUsersList(
         userName: localUserData.getUserName(),
         phoneNumber: localUserData.getPhoneNumber(),
         chooseMood: localUserData.getChooseMood(),
         uID: localUserData.getUId(),
-        dateTime: messageDataObject.dateTime);
+        dateTime: messageDataObject.dateTime,
+        senderId: messageDataObject.senderId,
+        flag: 'true');
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,
         userDetails.uID, messageDataObject.senderId); // id bta3 mohab
     var result2 = await setOrRetrieveData.addMessage(
         messageDataObject, messageDataObject.senderId, userDetails.uID);
-    setOrRetrieveData.getChatList(
+    setOrRetrieveData.setChatList(
         messageDataObject.senderId, userDetails.uID, _userDataUsersList);
-    setOrRetrieveData.getChatList(userDetails.uID, messageDataObject.senderId,
+    setOrRetrieveData.setChatList(userDetails.uID, messageDataObject.senderId,
         _userDataUsersListProvider);
   }
 }

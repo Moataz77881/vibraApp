@@ -9,24 +9,28 @@ class deafblindTitle extends StatelessWidget {
 
   deafblindTitle({required this.user});
 
-  vibrationInAction _vibrationInAction = new vibrationInAction();
+  final vibrationInAction _vibrationInAction = vibrationInAction();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        padding: EdgeInsets.all(10),
-        child: Container(
-          width: 20,
-          height: 50,
-          decoration: BoxDecoration(
-              color: Color.fromARGB(107, 212, 212, 212),
-              borderRadius: BorderRadius.circular(20)),
-          child: Center(
-              child: Text(
-            user.userName,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Container(
+              width: 300,
+              height: 600,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(107, 212, 212, 212),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Center(
+                  child: Text(
+                user.userName,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              )),
+            ),
+          ],
         ),
       ),
       onDoubleTap: () {

@@ -24,12 +24,12 @@ class buttonOption extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            margin: EdgeInsets.all(12),
+            margin: const EdgeInsets.all(12),
             child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 1, 87, 207)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      const Color.fromARGB(255, 1, 87, 207)),
+                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
                   )),
                 ),
@@ -54,17 +54,16 @@ class buttonOption extends StatelessWidget {
                           showLoading();
                           showMessage.show(
                               context, 'account created successfully');
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamedAndRemoveUntil(
                               context,
-                              caregiverChatList
-                                  .routName); //push to the next screen without back to the register screen
+                              caregiverChatList.routName,
+                              (route) =>
+                                  false); //push to the next screen without back to the register screen
                         } else if (option == 'I am Blind - Deaf') {
                           showMessage.show(
                               context, 'account created successfully');
-                          Navigator.pushReplacementNamed(
-                              context,
-                              deafblindChatList
-                                  .routName); //push to the next screen without back to the register screen
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              deafblindChatList.routName, (route) => false);
                         }
                       }
                     }).onError((error, stackTrace) {
@@ -74,7 +73,7 @@ class buttonOption extends StatelessWidget {
                 },
                 child: Text(
                   option,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 )),
           ),
         ),

@@ -16,15 +16,15 @@ class chatDetailsScreen extends StatefulWidget {
 
 class _chatDetailsScreenState extends State<chatDetailsScreen> {
   late userData userDetails;
-  TextEditingController message = new TextEditingController();
+  TextEditingController message = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
-      backgroundColor: Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
         title: Image.asset(
           'assets/images/vibra.png',
           width: 120,
@@ -33,9 +33,9 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(12),
+        decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
@@ -43,10 +43,11 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Text(userDetails.userName,
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
@@ -62,7 +63,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: StreamBuilder<QuerySnapshot<messageData>>(
                   stream: messageData
                       .withConverter(localUserData.getUId(), userDetails.uID)
@@ -73,7 +74,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                       return Center(child: Text(snapshot.error.toString()));
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -81,7 +82,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                     snapshot.data!.docs.map((doc) => doc.data()).toList();
                     return ListView.builder(
                         itemCount: data.length,
-                        itemBuilder: (BuildContext, index) {
+                        itemBuilder: (buildContext, index) {
                           return messageWidget(data[index]);
                         });
                   },
@@ -92,6 +93,8 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
               children: [
                 Expanded(
                   child: TextFormField(
+                    maxLines: 2,
+                    keyboardType: TextInputType.multiline,
                     controller: message,
                     onFieldSubmitted: (text) {
                       setState(() {
@@ -99,7 +102,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                       });
                     },
                     cursorColor: Colors.black,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         fillColor: Color.fromARGB(190, 234, 233, 233),
                         filled: true,
                         hintText: 'Type your message',
@@ -111,7 +114,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                                 topRight: Radius.circular(12)))),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 ElevatedButton(
@@ -121,7 +124,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                       }
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'send',
                           style: TextStyle(color: Colors.white),
@@ -156,22 +159,26 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         phoneNumber: userDetails.phoneNumber,
         chooseMood: userDetails.chooseMood,
         uID: userDetails.uID,
-        dateTime: messageDataObject.dateTime);
+        dateTime: messageDataObject.dateTime,
+        senderId: messageDataObject.senderId,
+        flag: 'false');
 
     userDataUsersList _userDataUsersListCurrentUser = userDataUsersList(
         userName: localUserData.getUserName(),
         phoneNumber: localUserData.getPhoneNumber(),
         chooseMood: localUserData.getChooseMood(),
         uID: localUserData.getUId(),
-        dateTime: messageDataObject.dateTime);
+        dateTime: messageDataObject.dateTime,
+        senderId: messageDataObject.senderId,
+        flag: 'true');
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,
         userDetails.uID, messageDataObject.senderId); // id bta3 mohab
     var result2 = await setOrRetrieveData.addMessage(
         messageDataObject, messageDataObject.senderId, userDetails.uID);
-    setOrRetrieveData.getChatList(
+    setOrRetrieveData.setChatList(
         messageDataObject.senderId, userDetails.uID, _userDataUsersList);
-    setOrRetrieveData.getChatList(userDetails.uID, messageDataObject.senderId,
+    setOrRetrieveData.setChatList(userDetails.uID, messageDataObject.senderId,
         _userDataUsersListCurrentUser);
   }
 }

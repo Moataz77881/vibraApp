@@ -13,16 +13,16 @@ class searchScreenList extends StatefulWidget {
 }
 
 class _searchScreenListState extends State<searchScreenList> {
-  vibrationInAction _vibrationInAction = new vibrationInAction();
+  final vibrationInAction _vibrationInAction = vibrationInAction();
 
   @override
   Widget build(BuildContext context) {
     var contentSearch = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(206, 250, 250, 251),
+        backgroundColor: const Color.fromARGB(206, 250, 250, 251),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 1, 87, 207),
+          backgroundColor: const Color.fromARGB(255, 1, 87, 207),
           title: Image.asset(
             "assets/images/vibra.png",
             width: 120,
@@ -32,14 +32,13 @@ class _searchScreenListState extends State<searchScreenList> {
         ),
         body: SimpleGestureDetector(
           child: Container(
-            margin: EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               children: [
-                Container(
-                    child: Expanded(
+                Expanded(
                   child: StreamBuilder<QuerySnapshot<userData>>(
                       stream: userData
                           .withConverter()
@@ -50,7 +49,7 @@ class _searchScreenListState extends State<searchScreenList> {
                           return Center(child: Text(snapshot.error.toString()));
                         } else if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -68,7 +67,7 @@ class _searchScreenListState extends State<searchScreenList> {
                                   user: user!.elementAt(index));
                             });
                       }),
-                )),
+                ),
               ],
             ),
           ),

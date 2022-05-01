@@ -7,12 +7,12 @@ class textFieldBorderUsername extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: TextFormField(
         cursorColor: Colors.white,
         keyboardType: TextInputType.text,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
+        style: const TextStyle(color: Colors.white),
+        decoration: const InputDecoration(
             filled: true,
             fillColor: Color.fromARGB(255, 0, 70, 168),
             hintText: hintText,

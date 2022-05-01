@@ -8,13 +8,17 @@ class userDataUsersList {
   String phoneNumber;
   String userName;
   DateTime dateTime;
+  String senderId;
+  String flag;
 
   userDataUsersList(
       {required this.uID,
       required this.userName,
       required this.phoneNumber,
       required this.dateTime,
-      required this.chooseMood});
+      required this.chooseMood,
+      required this.senderId,
+      required this.flag});
 
   userDataUsersList.fromFireStore(Map<String, dynamic> json)
       : this(
@@ -23,7 +27,9 @@ class userDataUsersList {
             uID: json['uID'] as String,
             chooseMood: json['chooseMood'] as String,
             dateTime:
-                DateTime.fromMicrosecondsSinceEpoch(json['dateTime'] as int));
+                DateTime.fromMicrosecondsSinceEpoch(json['dateTime'] as int),
+            senderId: json['senderId'] as String,
+            flag: json['flag'] as String);
 
   Map<String, dynamic> toFireStore() {
     return {
@@ -31,7 +37,9 @@ class userDataUsersList {
       'phoneNumber': phoneNumber,
       'uID': uID,
       'chooseMood': chooseMood,
-      'dateTime': dateTime.millisecondsSinceEpoch
+      'dateTime': dateTime.millisecondsSinceEpoch,
+      'senderId': senderId,
+      'flag': flag
     };
   }
 
