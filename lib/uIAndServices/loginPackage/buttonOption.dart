@@ -42,7 +42,8 @@ class buttonOption extends StatelessWidget {
                                 userName: userName,
                                 phoneNumber: phoneNumber,
                                 uID: _firebaseAuth.currentUser!.uid,
-                                chooseMood: option))
+                                chooseMood: option,
+                                picturePath: ''))
                         .then((value) async {
                       var fireStoreUser = await setOrRetrieveData
                           .getDataById(_firebaseAuth.currentUser!.uid);
@@ -50,6 +51,7 @@ class buttonOption extends StatelessWidget {
                         // todo save user data in local device
                         localUserData.setUserData(userName, phoneNumber,
                             _firebaseAuth.currentUser!.uid, option);
+                        localUserData.setPicturePath('');
                         if (option == 'I am Caregiver') {
                           showLoading();
                           showMessage.show(

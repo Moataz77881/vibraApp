@@ -89,6 +89,7 @@ class _deafblindChatDetailsScreenState
                   dateTime: lastMessageDateTime,
                   chooseMood: userDetails.chooseMood,
                   senderId: localUserData.getUId(),
+                  picturePath: userDetails.picturePath,
                   flag: 'false');
               setOrRetrieveData.updateChatList(
                   localUserData.getUId(), userDetails.uID, user);

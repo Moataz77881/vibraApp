@@ -155,7 +155,8 @@ class _deafblindChatListState extends State<deafblindChatList> {
                               userName: user.elementAt(index).userName,
                               phoneNumber: user.elementAt(index).phoneNumber,
                               uID: user.elementAt(index).uID,
-                              chooseMood: user.elementAt(index).chooseMood);
+                              chooseMood: user.elementAt(index).chooseMood,
+                              picturePath: '');
                           return deafblindUserTitle(
                             user: _user,
                             userFlag: user.elementAt(index),

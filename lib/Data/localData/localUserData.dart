@@ -5,6 +5,9 @@ class localUserData {
   static const phoneNumberKey = 'phoneNumber';
   static const uIdKey = 'uId';
   static const chooseMoodKey = 'chooseMood';
+  static const picturePath = 'picturePath';
+
+  // static const picturePathDevice = 'picturePathDevice';
 
   static late SharedPreferences _preferences;
 
@@ -19,6 +22,14 @@ class localUserData {
     await _preferences.setString(uIdKey, uId);
     await _preferences.setString(chooseMoodKey, chooseMood);
   }
+
+  static Future<void> setPicturePath(String path) async {
+    await _preferences.setString(picturePath, path);
+  }
+
+  // static Future<void> setPicturePathDevice(String path){
+  //   return _preferences.setString(picturePathDevice, path);
+  // }
 
   static String getUserName() {
     return _preferences.getString(userNameKey) as String;
@@ -35,4 +46,11 @@ class localUserData {
   static String getChooseMood() {
     return _preferences.getString(chooseMoodKey) as String;
   }
+
+  static String getPicturePath() {
+    return _preferences.getString(picturePath) as String;
+  }
+// static String getPicturePathDevice(){
+//   return _preferences.getString(picturePathDevice) as String;
+// }
 }

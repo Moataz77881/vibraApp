@@ -43,12 +43,18 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
             Row(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(userDetails.userName,
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold)),
+                  padding: const EdgeInsets.all(5),
+                  child: CircleAvatar(
+                    backgroundImage: userDetails.picturePath == ''
+                        ? null
+                        : NetworkImage(userDetails.picturePath),
+                    backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+                    radius: 28,
+                  ),
                 ),
+                Text(userDetails.userName,
+                    style: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.bold)),
               ],
             ),
             Row(
@@ -161,6 +167,8 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         uID: userDetails.uID,
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
+        picturePath:
+            userDetails.picturePath.isEmpty ? '' : userDetails.picturePath,
         flag: 'false');
 
     userDataUsersList _userDataUsersListCurrentUser = userDataUsersList(
@@ -170,6 +178,9 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         uID: localUserData.getUId(),
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
+        picturePath: localUserData.getPicturePath().isEmpty
+            ? ''
+            : localUserData.getPicturePath(),
         flag: 'true');
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,

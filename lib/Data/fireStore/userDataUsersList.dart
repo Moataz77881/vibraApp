@@ -10,6 +10,7 @@ class userDataUsersList {
   DateTime dateTime;
   String senderId;
   String flag;
+  String picturePath;
 
   userDataUsersList(
       {required this.uID,
@@ -18,17 +19,19 @@ class userDataUsersList {
       required this.dateTime,
       required this.chooseMood,
       required this.senderId,
-      required this.flag});
+      required this.flag,
+      required this.picturePath});
 
   userDataUsersList.fromFireStore(Map<String, dynamic> json)
       : this(
-            userName: json['userName'] as String,
+      userName: json['userName'] as String,
             phoneNumber: json['phoneNumber'] as String,
             uID: json['uID'] as String,
             chooseMood: json['chooseMood'] as String,
             dateTime:
                 DateTime.fromMicrosecondsSinceEpoch(json['dateTime'] as int),
             senderId: json['senderId'] as String,
+            picturePath: json['picturePath'] as String,
             flag: json['flag'] as String);
 
   Map<String, dynamic> toFireStore() {
@@ -39,6 +42,7 @@ class userDataUsersList {
       'chooseMood': chooseMood,
       'dateTime': dateTime.millisecondsSinceEpoch,
       'senderId': senderId,
+      'picturePath': picturePath,
       'flag': flag
     };
   }

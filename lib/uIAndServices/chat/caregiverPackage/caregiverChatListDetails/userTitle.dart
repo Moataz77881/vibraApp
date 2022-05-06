@@ -13,23 +13,21 @@ class userTitle extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, chatDetailsScreen.routName,
             arguments: user);
+        // print(user.picturePath);
       },
       child: Container(
         padding: const EdgeInsets.all(5),
         child: Row(
           children: [
             Container(
-              margin: const EdgeInsets.only(left: 20),
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 1, 87, 207),
-                  borderRadius: BorderRadius.circular(40)),
-              child: Center(
-                  child: Text(
-                user.userName.substring(0, 1),
-                style: const TextStyle(color: Colors.white),
-              )),
+              child: CircleAvatar(
+                backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+                backgroundImage: user.picturePath == ''
+                    ? null
+                    : NetworkImage(user.picturePath),
+                // backgroundImage: null,
+                radius: 25,
+              ),
             ),
             const SizedBox(
               width: 8,

@@ -34,6 +34,7 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
           dateTime: widget.userFlag.dateTime,
           chooseMood: widget.userFlag.chooseMood,
           senderId: widget.userFlag.senderId,
+          picturePath: widget.userFlag.picturePath,
           flag: 'false');
     });
     return InkWell(

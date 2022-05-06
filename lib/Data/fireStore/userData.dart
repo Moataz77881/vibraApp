@@ -6,19 +6,22 @@ class userData {
   String chooseMood;
   String phoneNumber;
   String uID;
+  String picturePath;
 
   userData(
       {required this.userName,
       required this.phoneNumber,
       required this.uID,
-      required this.chooseMood});
+      required this.chooseMood,
+      required this.picturePath});
 
   userData.fromFireStore(Map<String, dynamic> json)
       : this(
             userName: json['userName'] as String,
             phoneNumber: json['phoneNumber'] as String,
             uID: json['uID'] as String,
-            chooseMood: json['chooseMood'] as String);
+            chooseMood: json['chooseMood'] as String,
+            picturePath: json['picturePath'] as String);
 
   // get data from fire store
   Map<String, dynamic> toFireStore() {
@@ -26,7 +29,8 @@ class userData {
       'userName': userName,
       'phoneNumber': phoneNumber,
       'uID': uID,
-      'chooseMood': chooseMood
+      'chooseMood': chooseMood,
+      'picturePath': picturePath
     };
   }
 

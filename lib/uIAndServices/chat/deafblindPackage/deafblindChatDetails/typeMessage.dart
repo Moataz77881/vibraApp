@@ -133,6 +133,7 @@ class _typeMessageState extends State<typeMessage> {
         uID: userDetails.uID,
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
+        picturePath: userDetails.picturePath,
         flag: 'false');
 
     userDataUsersList _userDataUsersListProvider = userDataUsersList(
@@ -142,6 +143,7 @@ class _typeMessageState extends State<typeMessage> {
         uID: localUserData.getUId(),
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
+        picturePath: localUserData.picturePath,
         flag: 'true');
 
     var result1 = await setOrRetrieveData.addMessage(messageDataObject,
