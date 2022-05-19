@@ -28,7 +28,7 @@ class buttonOption extends StatelessWidget {
             child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      const Color.fromARGB(255, 1, 87, 207)),
+                      const Color.fromARGB(255, 15, 111, 255)),
                   shape: MaterialStateProperty.all(const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
                   )),
@@ -47,6 +47,7 @@ class buttonOption extends StatelessWidget {
                         .then((value) async {
                       var fireStoreUser = await setOrRetrieveData
                           .getDataById(_firebaseAuth.currentUser!.uid);
+                      // fireStoreUser.
                       if (fireStoreUser != null) {
                         // todo save user data in local device
                         localUserData.setUserData(userName, phoneNumber,

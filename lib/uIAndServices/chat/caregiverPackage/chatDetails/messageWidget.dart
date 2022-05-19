@@ -12,6 +12,7 @@ class messageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: const EdgeInsets.all(3),
         child: messageDataObject.senderId == localUserData.getUId()
             ? sendMessagesShow(messageDataObject.content,
                 messageDataObject.dateTime.toString())

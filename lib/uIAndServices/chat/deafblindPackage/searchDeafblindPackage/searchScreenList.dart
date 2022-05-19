@@ -22,7 +22,7 @@ class _searchScreenListState extends State<searchScreenList> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(206, 250, 250, 251),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+          backgroundColor: Color.fromARGB(255, 15, 111, 255),
           title: Image.asset(
             "assets/images/vibra.png",
             width: 120,

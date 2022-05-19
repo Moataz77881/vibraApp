@@ -31,6 +31,7 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
           uID: widget.userFlag.uID,
           userName: widget.userFlag.userName,
           phoneNumber: widget.userFlag.phoneNumber,
+          lastMessage: '',
           dateTime: widget.userFlag.dateTime,
           chooseMood: widget.userFlag.chooseMood,
           senderId: widget.userFlag.senderId,
@@ -57,7 +58,7 @@ class _deafblindUserTitleState extends State<deafblindUserTitle> {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 1, 87, 207),
+                  color: const Color.fromARGB(255, 15, 111, 255),
                   borderRadius: BorderRadius.circular(40)),
               child: Center(
                   child: Text(

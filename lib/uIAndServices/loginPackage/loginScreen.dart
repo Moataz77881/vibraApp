@@ -21,8 +21,10 @@ class loginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+      // backgroundColor: const Color.fromARGB(255, 1, 87, 207),
       // #0046A8 Inputs #0F6FFF continue button
+      // backgroundColor: Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: Colors.white,
       body: Form(
         key: formKey,
         child: Container(
@@ -32,7 +34,7 @@ class loginScreen extends StatelessWidget {
               Spacer(),
               Container(
                 child: Image.asset(
-                  "assets/images/vibra.png",
+                  "assets/images/vibraWhite.png",
                   width: 200,
                   height: 200,
                 ),

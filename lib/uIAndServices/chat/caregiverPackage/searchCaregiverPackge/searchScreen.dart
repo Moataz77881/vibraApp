@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Data/fireStore/userData.dart';
 import 'package:graduation_project/uIAndServices/chat/caregiverPackage/searchCaregiverPackge/searchTitle.dart';
@@ -19,7 +20,7 @@ class _searchScreenState extends State<searchScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: const Color.fromARGB(255, 53, 115, 234),
         title: Image.asset(
           "assets/images/vibra.png",
           width: 120,
@@ -39,23 +40,32 @@ class _searchScreenState extends State<searchScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      textInputAction: TextInputAction.newline,
-                      autofocus: true,
-                      cursorColor: Colors.black,
-                      keyboardType: TextInputType.text,
-                      onChanged: (value) {
-                        name = value;
-                        setState(() {});
-                      },
-                      decoration: const InputDecoration(
-                          fillColor: Color.fromARGB(190, 234, 233, 233),
-                          filled: true,
-                          hintText: 'Search',
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              borderSide: BorderSide(color: Colors.white))),
+                    child: SizedBox(
+                      // padding: EdgeInsets.all(1),
+                      height: 50,
+                      child: TextFormField(
+                        textInputAction: TextInputAction.newline,
+                        autofocus: true,
+                        cursorColor: Colors.black,
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        },
+                        decoration: const InputDecoration(
+                            fillColor: Color.fromARGB(190, 234, 233, 233),
+                            filled: true,
+                            hintText: 'Search',
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 20),
+                            // hintStyle: TextStyle(fontStyle: ),
+                            // hintStyle: TextStyle(fontSize: 20),
+                            // helperStyle: TextStyle(fontSize: 100),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40)),
+                                borderSide: BorderSide(color: Colors.white))),
+                      ),
                     ),
                   ),
                 ],

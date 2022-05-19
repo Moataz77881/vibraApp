@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/uIAndServices/loginPackage/loginScreen.dart';
 import 'package:graduation_project/uIAndServices/loginPackage/optionScreen.dart';
@@ -23,18 +24,21 @@ class textFieldBorderPhoneNumber extends StatelessWidget {
             return 'Invalid phone number';
           }
         },
-        cursorColor: Colors.white,
+        cursorColor: Colors.black,
         keyboardType: TextInputType.phone,
-        textStyle: const TextStyle(color: Colors.white),
+        textStyle: const TextStyle(color: Colors.black),
         inputDecoration: const InputDecoration(
             filled: true,
-            fillColor: Color.fromARGB(255, 0, 70, 168),
+            fillColor: Color.fromARGB(190, 234, 233, 233),
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.white),
+            // hintStyle: TextStyle(color: Colors.black),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+                borderSide: BorderSide(width: 0, style: BorderStyle.none)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
                 borderSide:
-                    BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
+                    BorderSide(color: Color.fromRGBO(255, 255, 255, 1.0)))),
         initialValue: _number,
         formatInput: true,
       ),

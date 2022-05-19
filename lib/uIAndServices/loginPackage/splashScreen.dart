@@ -9,11 +9,11 @@ class splashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: 'assets/images/vibra.png',
+      splash: 'assets/images/vibraWhite.png',
       // splash image
       nextScreen: loginScreen(),
       //navigation
-      backgroundColor: Color.fromARGB(255, 1, 87, 207),
+      backgroundColor: Colors.white,
       splashIconSize: 200,
       //size of splash image
       duration: 2000,

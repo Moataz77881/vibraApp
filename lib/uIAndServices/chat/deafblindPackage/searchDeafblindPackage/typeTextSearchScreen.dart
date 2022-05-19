@@ -13,7 +13,7 @@ class typeTextSearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: Color.fromARGB(255, 15, 111, 255),
         title: Image.asset(
           'assets/images/vibra.png',
           width: 120,
@@ -32,7 +32,7 @@ class typeTextSearchScreen extends StatelessWidget {
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 1, 87, 207)),
+                            const Color.fromARGB(255, 15, 111, 255)),
                         shape: MaterialStateProperty.all(
                             const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(

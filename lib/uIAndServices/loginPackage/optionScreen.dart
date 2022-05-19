@@ -14,7 +14,7 @@ class optionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: Color.fromARGB(255, 15, 111, 255),
         title: Image.asset(
           'assets/images/vibra.png',
           width: 120,
@@ -22,20 +22,14 @@ class optionScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-                flex: 6,
-                child: buttonOption(
-                    uID, userName, phoneNumber, 'I am Blind - Deaf')),
-
-            Expanded(
-                flex: 4,
-                child:
-                    buttonOption(uID, userName, phoneNumber, 'I am Caregiver'))
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+              child: buttonOption(
+                  uID, userName, phoneNumber, 'I am Blind - Deaf')),
+          Expanded(
+              child: buttonOption(uID, userName, phoneNumber, 'I am Caregiver'))
+        ],
       ),
     );
   }

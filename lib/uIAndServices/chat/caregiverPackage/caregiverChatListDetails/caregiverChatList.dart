@@ -23,13 +23,15 @@ class caregiverChatList extends StatefulWidget {
 
 class _caregiverChatListState extends State<caregiverChatList> {
   String _Image = '';
+  // PlatformStringCryptor cryptor = PlatformStringCryptor();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(206, 250, 250, 251),
+      backgroundColor: const Color.fromARGB(255, 53, 115, 234),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 53, 115, 234),
         centerTitle: true,
         title: Image.asset(
           'assets/images/vibra.png',
@@ -38,8 +40,7 @@ class _caregiverChatListState extends State<caregiverChatList> {
         ),
         actions: [
           PopupMenuButton(
-              itemBuilder: (buildContext) =>
-              [
+              itemBuilder: (buildContext) => [
                     PopupMenuItem(
                         child: Row(
                       children: [
@@ -51,8 +52,8 @@ class _caregiverChatListState extends State<caregiverChatList> {
                                     ''
                                 ? null
                                 : NetworkImage(localUserData.getPicturePath()),
-                            backgroundColor:
-                                const Color.fromARGB(255, 1, 87, 207),
+                            backgroundColor: const Color.fromRGBO(
+                                208, 207, 207, 0.8588235294117647),
                             radius: 30,
                           ),
                         ),
@@ -95,64 +96,80 @@ class _caregiverChatListState extends State<caregiverChatList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 53, 115, 234),
         onPressed: () {
           Navigator.pushNamed(context, searchScreen.routName);
         },
         child: const Icon(Icons.search),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: CircleAvatar(
-                    // backgroundImage: _Image.isEmpty ? null : FileImage(File(_Image)),
-                    backgroundImage: localUserData.getPicturePath() == ''
-                        ? null
-                        : NetworkImage(localUserData.getPicturePath()),
-                    backgroundColor: const Color.fromARGB(255, 1, 87, 207),
-                    radius: 30,
-                  ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 13, horizontal: 18),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: CircleAvatar(
+                  backgroundImage: localUserData.getPicturePath() == ''
+                      ? null
+                      : NetworkImage(localUserData.getPicturePath()),
+                  backgroundColor: Colors.white,
+                  radius: 25,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    localUserData.getUserName(),
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    color: Colors.grey,
-                    width: 2,
-                    height: 2,
-                  ),
+              ),
+              const Spacer(),
+              const Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  'Chats',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 25),
                 ),
-              ],
-            ),
-            Expanded(
-                child: StreamBuilder<QuerySnapshot<userDataUsersList>>(
-                  stream: userDataUsersList
-                      .withConverter(localUserData.getUId())
-                      .orderBy('dateTime', descending: true)
-                      .snapshots(),
-                  builder: (builder, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(child: Text(snapshot.error.toString()));
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.waiting) {
+              ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: Text(
+              //     localUserData.getUserName(),
+              //     style: const TextStyle(
+              //         fontSize: 18, fontWeight: FontWeight.bold),
+              //   ),
+              // )
+            ],
+          ),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: Container(
+          //         margin: const EdgeInsets.only(bottom: 8),
+          //         color: Colors.grey,
+          //         width: 2,
+          //         height: 2,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          Expanded(
+              child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            // margin: EdgeInsets.symmetric(vertical: 10),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30))),
+            child: StreamBuilder<QuerySnapshot<userDataUsersList>>(
+              stream: userDataUsersList
+                  .withConverter(localUserData.getUId())
+                  .orderBy('dateTime', descending: true)
+                  .snapshots(),
+              builder: (builder, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text(snapshot.error.toString()));
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
@@ -173,12 +190,13 @@ class _caregiverChatListState extends State<caregiverChatList> {
                           picturePath: user.elementAt(index).picturePath);
                       return userTitle(
                         user: _user,
+                        lastMessage: user.elementAt(index).lastMessage,
                       );
                     });
               },
-            ))
-          ],
-        ),
+            ),
+          ))
+        ],
       ),
     );
   }
@@ -222,4 +240,12 @@ class _caregiverChatListState extends State<caregiverChatList> {
       });
     }
   }
+// void encrypt()async{
+//   var cryptor = await PlatformStringCryptor();
+//   String key = await cryptor.generateKeyFromPassword('moataz', 'sssss12');
+//   print(key);
+//   String ecrypted = await cryptor.encrypt('moataz', key);
+//   String encryptedString = ecrypted;
+//   print(encryptedString);
+// }
 }

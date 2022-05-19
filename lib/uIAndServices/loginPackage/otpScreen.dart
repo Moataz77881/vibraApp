@@ -17,7 +17,8 @@ class otpScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+      // backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           const Spacer(),
@@ -25,18 +26,22 @@ class otpScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: otpController,
-              cursorColor: Colors.white,
+              cursorColor: Colors.black,
               keyboardType: TextInputType.text,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               decoration: const InputDecoration(
                   filled: true,
-                  fillColor: Color.fromARGB(255, 0, 70, 168),
+                  fillColor: Color.fromRGBO(234, 233, 233, 0.7450980392156863),
                   hintText: 'Enter OTP',
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.black, fontSize: 14),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
                       borderSide:
-                          BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
+                          BorderSide(width: 0, style: BorderStyle.none)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+                      borderSide:
+                          BorderSide(style: BorderStyle.none, width: 0))),
             ),
           ),
           const SizedBox(

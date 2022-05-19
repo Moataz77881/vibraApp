@@ -29,7 +29,7 @@ class _deafblindChatListState extends State<deafblindChatList> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: Color.fromARGB(255, 15, 111, 255),
         centerTitle: true,
         title: Image.asset(
           'assets/images/vibra.png',
@@ -88,7 +88,7 @@ class _deafblindChatListState extends State<deafblindChatList> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 1, 87, 207),
+                        color: const Color.fromARGB(255, 15, 111, 255),
                         borderRadius: BorderRadius.circular(40)),
                     child: Center(
                         child: Text(

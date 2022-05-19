@@ -8,19 +8,30 @@ class textFieldBorderUsername extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.all(Radius.elliptical(15, 15))
+      // ),\
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.all(Radius.elliptical(15, 15))
+      // ),
       child: TextFormField(
-        cursorColor: Colors.white,
+        autofocus: true,
+        cursorColor: Colors.black,
         keyboardType: TextInputType.text,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.black),
         decoration: const InputDecoration(
             filled: true,
-            fillColor: Color.fromARGB(255, 0, 70, 168),
+            fillColor: Color.fromRGBO(234, 233, 233, 0.7450980392156863),
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.white),
             border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+              borderSide: BorderSide(width: 0, style: BorderStyle.none),
+            ),
+            focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
-                borderSide:
-                    BorderSide(color: Color.fromARGB(255, 0, 70, 168)))),
+                borderSide: BorderSide(
+                  color: Color.fromRGBO(255, 255, 255, 1.0),
+                ))),
         onChanged: (inputName) {
           optionScreen.userName = inputName;
         },
@@ -28,8 +39,8 @@ class textFieldBorderUsername extends StatelessWidget {
           if (value == null || value.trim().isEmpty) {
             // (trim) when user enter spaces in text form
             return 'Please enter user name';
-          } else
-            return null;
+          }
+          return null;
         },
       ),
     );

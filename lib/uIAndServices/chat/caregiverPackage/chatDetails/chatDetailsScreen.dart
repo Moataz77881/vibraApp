@@ -17,6 +17,7 @@ class chatDetailsScreen extends StatefulWidget {
 class _chatDetailsScreenState extends State<chatDetailsScreen> {
   late userData userDetails;
   TextEditingController message = TextEditingController();
+  String lastMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -24,49 +25,35 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(206, 250, 250, 251),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 87, 207),
-        title: Image.asset(
-          'assets/images/vibra.png',
-          width: 120,
-          height: 120,
+        elevation: .5,
+        backgroundColor: const Color.fromARGB(200, 250, 250, 251),
+        titleSpacing: -10,
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: userDetails.picturePath == ''
+                  ? null
+                  : NetworkImage(userDetails.picturePath),
+              backgroundColor: Color.fromARGB(255, 53, 115, 234),
+              radius: 22,
+              // child: Image.asset('assets/images/backgroundUser.webp',),
+            ),
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(
+                  userDetails.userName,
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                ))
+          ],
         ),
-        centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Color.fromARGB(255, 53, 115, 234),
+        ),
       ),
       body: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.all(12),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+        color: const Color.fromARGB(206, 250, 250, 251),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  child: CircleAvatar(
-                    backgroundImage: userDetails.picturePath == ''
-                        ? null
-                        : NetworkImage(userDetails.picturePath),
-                    backgroundColor: const Color.fromARGB(255, 1, 87, 207),
-                    radius: 28,
-                  ),
-                ),
-                Text(userDetails.userName,
-                    style: const TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.bold)),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  color: Colors.grey,
-                  width: 2,
-                  height: 1,
-                )),
-              ],
-            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -85,7 +72,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                       );
                     }
                     var data =
-                    snapshot.data!.docs.map((doc) => doc.data()).toList();
+                        snapshot.data!.docs.map((doc) => doc.data()).toList();
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (buildContext, index) {
@@ -95,53 +82,75 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    maxLines: 2,
-                    keyboardType: TextInputType.multiline,
-                    controller: message,
-                    onFieldSubmitted: (text) {
-                      setState(() {
-                        message.text = text;
-                      });
-                    },
-                    cursorColor: Colors.black,
-                    decoration: const InputDecoration(
-                        fillColor: Color.fromARGB(190, 234, 233, 233),
-                        filled: true,
-                        hintText: 'Type your message',
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(190, 170, 170, 170),
-                                width: 2),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(12)))),
+            Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Colors.white,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      maxLines: 2,
+                      keyboardType: TextInputType.multiline,
+                      controller: message,
+                      onFieldSubmitted: (text) {
+                        setState(() {
+                          message.text = text;
+                        });
+                      },
+                      cursorColor: Colors.black,
+                      decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: 'Type your message',
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  // color: Color.fromARGB(190, 170, 170, 170),
+                                  color: Colors.white,
+                                  width: 2),
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(12)))),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      if (message.text.isNotEmpty) {
-                        sendMessage();
-                      }
-                    },
-                    child: Row(
-                      children: const [
-                        Text(
-                          'send',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Icon(Icons.send)
-                      ],
-                    ))
-              ],
+                  // const SizedBox(
+                  //   width: 15,
+                  // ),
+                  SizedBox(
+                    width: 52,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (message.text.isNotEmpty) {
+                            sendMessage();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            shadowColor: Colors.white,
+                            elevation: 0,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(70)))),
+                        child: Row(
+                          children: const [
+                            // Text(
+                            //   'send',
+                            //   style: TextStyle(color: Colors.white),
+                            // ),
+                            // SizedBox(
+                            //   width: 8,
+                            // ),
+                            Icon(
+                              Icons.send,
+                              color: Color.fromARGB(255, 53, 115, 234),
+                              size: 20,
+                            )
+                          ],
+                        )),
+                  )
+                ],
+              ),
             )
           ],
         ),
@@ -164,6 +173,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         userName: userDetails.userName,
         phoneNumber: userDetails.phoneNumber,
         chooseMood: userDetails.chooseMood,
+        lastMessage: messageDataObject.content,
         uID: userDetails.uID,
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
@@ -178,6 +188,7 @@ class _chatDetailsScreenState extends State<chatDetailsScreen> {
         uID: localUserData.getUId(),
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
+        lastMessage: messageDataObject.content,
         picturePath: localUserData.getPicturePath().isEmpty
             ? ''
             : localUserData.getPicturePath(),

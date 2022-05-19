@@ -11,6 +11,7 @@ class userDataUsersList {
   String senderId;
   String flag;
   String picturePath;
+  String lastMessage;
 
   userDataUsersList(
       {required this.uID,
@@ -20,7 +21,8 @@ class userDataUsersList {
       required this.chooseMood,
       required this.senderId,
       required this.flag,
-      required this.picturePath});
+      required this.picturePath,
+      required this.lastMessage});
 
   userDataUsersList.fromFireStore(Map<String, dynamic> json)
       : this(
@@ -31,6 +33,7 @@ class userDataUsersList {
             dateTime:
                 DateTime.fromMicrosecondsSinceEpoch(json['dateTime'] as int),
             senderId: json['senderId'] as String,
+            lastMessage: json['lastMessage'] as String,
             picturePath: json['picturePath'] as String,
             flag: json['flag'] as String);
 
@@ -43,7 +46,8 @@ class userDataUsersList {
       'dateTime': dateTime.millisecondsSinceEpoch,
       'senderId': senderId,
       'picturePath': picturePath,
-      'flag': flag
+      'flag': flag,
+      'lastMessage': lastMessage
     };
   }
 

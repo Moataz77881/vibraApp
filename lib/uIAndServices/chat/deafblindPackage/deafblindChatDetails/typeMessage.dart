@@ -27,7 +27,7 @@ class _typeMessageState extends State<typeMessage> {
     userDetails = ModalRoute.of(context)?.settings.arguments as userData;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 87, 207),
+        backgroundColor: Color.fromARGB(255, 15, 111, 255),
         title: Image.asset(
           'assets/images/vibra.png',
           width: 120,
@@ -47,7 +47,7 @@ class _typeMessageState extends State<typeMessage> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 1, 87, 207)),
+                              Color.fromARGB(255, 15, 111, 255)),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
@@ -131,6 +131,7 @@ class _typeMessageState extends State<typeMessage> {
         phoneNumber: userDetails.phoneNumber,
         chooseMood: userDetails.chooseMood,
         uID: userDetails.uID,
+        lastMessage: '',
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
         picturePath: userDetails.picturePath,
@@ -141,6 +142,7 @@ class _typeMessageState extends State<typeMessage> {
         phoneNumber: localUserData.getPhoneNumber(),
         chooseMood: localUserData.getChooseMood(),
         uID: localUserData.getUId(),
+        lastMessage: '',
         dateTime: messageDataObject.dateTime,
         senderId: messageDataObject.senderId,
         picturePath: localUserData.picturePath,

@@ -19,9 +19,9 @@ class vibrateMessages extends vibrationInAction {
           await Vibration.vibrate(duration: 500);
           await Future.delayed(const Duration(milliseconds: 650));
         } else if (messageInMorse[i] == ' ') {
-          await Future.delayed(const Duration(milliseconds: 700));
+          await Future.delayed(const Duration(milliseconds: 650));
         } else if (messageInMorse[i] == '/') {
-          await Future.delayed(const Duration(milliseconds: 750));
+          await Future.delayed(const Duration(milliseconds: 250));
         }
       }
     }

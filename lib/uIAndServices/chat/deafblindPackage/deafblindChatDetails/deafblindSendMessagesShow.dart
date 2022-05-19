@@ -23,7 +23,7 @@ class deafblindSendMessagesShow extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 1, 87, 207),
+                  color: Color.fromARGB(255, 15, 111, 255),
                   borderRadius: BorderRadius.all(Radius.circular(24))),
               child: Text(
                 content,

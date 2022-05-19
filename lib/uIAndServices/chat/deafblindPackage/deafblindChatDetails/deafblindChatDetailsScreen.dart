@@ -86,6 +86,7 @@ class _deafblindChatDetailsScreenState
                   uID: userDetails.uID,
                   userName: userDetails.userName,
                   phoneNumber: userDetails.phoneNumber,
+                  lastMessage: '',
                   dateTime: lastMessageDateTime,
                   chooseMood: userDetails.chooseMood,
                   senderId: localUserData.getUId(),
@@ -112,7 +113,7 @@ class _deafblindChatDetailsScreenState
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 1, 87, 207),
+                          color: const Color.fromARGB(255, 15, 111, 255),
                           borderRadius: BorderRadius.circular(40)),
                       child: Center(
                           child: Text(
